@@ -2,7 +2,7 @@
 
 Source for my portfolio site, published with GitHub Pages.
 
-**Live site:** https://automater89.github.io/Agent-Showcase/
+**Live site:** https://automater89.github.io/Wes-Shelton/
 
 The site connects my experience to three kinds of roles: AI enablement, HR and benefits technology, and benefits operations. Visitors pick a view, and the site reorders the same set of case studies for that audience. The facts don't change between views.
 
@@ -26,8 +26,8 @@ Workplace figures appear only where they're program measures I can stand behind,
 ## Run locally
 
 ```bash
-git clone https://github.com/Automater89/Agent-Showcase.git
-cd Agent-Showcase
+git clone https://github.com/Automater89/Wes-Shelton.git
+cd Wes-Shelton
 python3 -m http.server 8000
 ```
 
