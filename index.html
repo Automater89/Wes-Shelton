@@ -3,11 +3,11 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Wes Shelton | HR &amp; Benefits Technology and Process Improvement</title>
-<meta name="description" content="Wes Shelton, Plymouth, MI. HR and benefits technology and process improvement, grounded in benefits operations and IT project delivery, with practical automation and AI enablement.">
+<title>Wes Shelton | HR &amp; Benefits Technology, AI Enablement, Process Improvement</title>
+<meta name="description" content="Wes Shelton, Plymouth, MI. HR and benefits technology, AI enablement and process improvement, grounded in benefits work and IT project delivery.">
 <meta name="author" content="Wes Shelton">
 <meta property="og:type" content="website">
-<meta property="og:title" content="Wes Shelton | HR &amp; Benefits Technology and Process Improvement">
+<meta property="og:title" content="Wes Shelton | HR &amp; Benefits Technology, AI Enablement, Process Improvement">
 <meta property="og:description" content="Helping teams improve benefits processes and the systems behind them.">
 <meta property="og:url" content="https://wesshelton.com/">
 <meta property="og:image" content="https://wesshelton.com/og-image-v2.png">
@@ -199,7 +199,7 @@ section{scroll-margin-top:16px}
 <section id="top" class="hero">
   <div class="wrap">
     <div>
-      <p class="eyebrow">HR &amp; BENEFITS TECHNOLOGY | PROCESS IMPROVEMENT</p>
+      <p class="eyebrow">HR &amp; BENEFITS TECHNOLOGY | AI ENABLEMENT | PROCESS IMPROVEMENT</p>
       <h1>Helping teams improve benefits processes and the systems behind them.</h1>
       <p class="lead">I worked in member support and benefits for more than ten years before moving into IT project delivery in December 2024. I help teams fix the workflows and systems employees depend on. I test the changes, write the guidance, and use automation and AI where they fit the work.</p>
       <div class="actions">
@@ -210,7 +210,7 @@ section{scroll-margin-top:16px}
     </div>
     <dl class="glance">
       <div><dt>Location</dt><dd>Plymouth, MI</dd></div>
-      <div><dt>Open to</dt><dd>HR and benefits technology, AI enablement, benefits operations</dd></div>
+      <div><dt>Open to</dt><dd>HR and benefits technology, AI enablement, process improvement</dd></div>
       <div><dt>Email</dt><dd><a href="mailto:wshelton89@gmail.com?subject=Portfolio%20inquiry">wshelton89@gmail.com</a></dd></div>
       <div><dt>Resume</dt><dd><a href="Wes_Shelton_Resume.pdf" download="Wes_Shelton_Resume.pdf">PDF</a> | <a href="Wes_Shelton_Resume.docx" download="Wes_Shelton_Resume.docx">Word</a></dd></div>
     </dl>
@@ -229,8 +229,9 @@ section{scroll-margin-top:16px}
         <div class="lanes" role="group" aria-labelledby="lane-label">
           <button type="button" class="lane" data-lane="hr" aria-pressed="true">HR &amp; Benefits Technology</button>
           <button type="button" class="lane" data-lane="ai" aria-pressed="false">AI Enablement</button>
-          <button type="button" class="lane" data-lane="ops" aria-pressed="false">Benefits Operations</button>
+          <button type="button" class="lane" data-lane="process" aria-pressed="false">Process Improvement</button>
         </div>
+        <button type="button" class="lane-extra" data-lane="ops" aria-pressed="false">Also: Benefits Operations</button>
         <button type="button" class="lane-extra" data-lane="intake" aria-pressed="false">Also: Intake &amp; Process Governance</button>
       </div>
     </div>
@@ -377,7 +378,7 @@ section{scroll-margin-top:16px}
     <div class="contact-grid">
       <div>
         <h2 id="contact-h">Let's talk about the work your team needs to improve.</h2>
-        <p>I'm interested in HR and benefits technology, AI enablement, and benefits operations roles. I'd welcome the chance to walk through the examples here and explain my contribution.</p>
+        <p>I'm interested in HR and benefits technology, AI enablement, and process improvement roles. I'd welcome the chance to walk through the examples here and explain my contribution.</p>
         <div class="actions">
           <a class="btn btn-light" href="mailto:wshelton89@gmail.com?subject=Portfolio%20inquiry">Email me</a>
           <a class="btn btn-outline-light" href="https://www.linkedin.com/in/wallace-shelton-559b0364">LinkedIn</a>
@@ -457,6 +458,7 @@ section{scroll-margin-top:16px}
   var LANES = {
     ai: { label: 'AI Enablement', intro: 'My AI work was hands-on: building and piloting tools, writing the training and guidance, and helping people use them day to day. Not every problem needed AI. The offboarding flow here is a standard Power Automate workflow.', order: ['learning', 'scorm', 'offboarding'] },
     hr: { label: 'HR & Benefits Technology', intro: 'Benefits work showed me where systems break down for employees, like rejected eligibility files and data that does not match between vendors. I use that when I gather requirements, test a workflow, or write the guidance people will read.', order: ['offboarding', 'audits', 'library'] },
+    process: { label: 'Process Improvement', intro: 'I look at how the work moves before I pick a tool. I helped IT teams document 29 processes in a shared library, planned HR offboarding with a charter and test plan before building it, and wrote request standards and response measures for a benefits team. I am also a Lean Six Sigma Black Belt.', order: ['library', 'offboarding', 'tracker'] },
     ops: { label: 'Benefits Operations', intro: 'Day to day, my benefits work was enrollment and life-event changes, COBRA and dependent eligibility, eligibility file rejects, Excel audits, vendor coordination, and open-enrollment and new-hire presentations.', order: ['audits', 'tracker', 'offboarding'] },
     intake: { label: 'Intake & Process Governance', intro: 'For application portfolio and business analysis roles. In IT I handled new application requests and their review, and helped the IT teams document their processes. The workbench below is a portfolio simulation, kept separate from that workplace work.', order: ['library', 'intakeSim'] }
   };
@@ -480,8 +482,9 @@ section{scroll-margin-top:16px}
     var L = LANES[lane];
     $('lane-intro').textContent = L.intro;
     document.querySelectorAll('[data-lane]').forEach(function(b){ b.setAttribute('aria-pressed', b.dataset.lane === lane ? 'true' : 'false'); });
-    var extra = document.querySelector('.lane-extra');
-    extra.textContent = lane === 'intake' ? 'Showing: Intake & Process Governance' : 'Also: Intake & Process Governance';
+    document.querySelectorAll('.lane-extra').forEach(function(x){
+      x.textContent = (lane === x.dataset.lane ? 'Showing: ' : 'Also: ') + LANES[x.dataset.lane].label;
+    });
     var ul = $('cards'); ul.innerHTML = '';
     L.order.forEach(function(id){
       var c = CASES[id];
