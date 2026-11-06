@@ -1,0 +1,312 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Case study: Running my job search like an AI enablement engagement | Wes Shelton</title>
+<meta name="description" content="How Wes Shelton designed, measured and revised an AI-assisted workflow for his own job search: two AI workspaces, written rules, one outcome measure, and a person approving every external action.">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Case study: Running my job search like an AI enablement engagement">
+<meta property="og:description" content="Two AI workspaces, written rules, one outcome measure, and a person approving every external action. What the data showed and what I changed.">
+<meta property="og:url" content="https://wesshelton.com/ai-workflow-case-study.html">
+<meta property="og:image" content="https://wesshelton.com/og-image-v2.png">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='12' fill='%230F6E6E'/%3E%3Ctext x='32' y='42' text-anchor='middle' font-family='Georgia,serif' font-size='30' font-weight='600' fill='%23fff'%3EW%3C/text%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Source+Serif+4:wght@600&family=IBM+Plex+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#F7F5F0; --surface:#FFFFFF; --surface-2:#FBFAF7; --ink:#14233A; --ink-2:#26324A; --muted:#3B4658; --muted-2:#5A6372;
+  --line:#E3DED3; --line-2:#CFC8BA; --teal:#0F6E6E; --teal-dark:#0B4F4F; --teal-soft:#EEF6F4; --chip:#EFEBE3;
+  --serif:'Source Serif 4', Georgia, serif; --sans:'IBM Plex Sans', system-ui, -apple-system, sans-serif;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:var(--sans);font-size:16px;line-height:1.6}
+a{color:var(--teal)} a:hover{color:var(--teal-dark)}
+a:focus-visible{outline:3px solid var(--teal);outline-offset:3px;border-radius:4px}
+h1,h2,h3,h4{font-family:var(--serif);font-weight:600;margin:0;line-height:1.15}
+p{margin:0}
+.wrap{max-width:1200px;margin:0 auto;padding:0 24px}
+.narrow{max-width:820px}
+.skip{position:absolute;left:-9999px;top:8px;background:var(--ink);color:#fff;padding:10px 16px;border-radius:6px;z-index:10}
+.skip:focus{left:16px}
+.site-header{border-bottom:1px solid var(--line);background:var(--bg)}
+.site-header .wrap{display:flex;align-items:center;justify-content:space-between;gap:16px;flex-wrap:wrap;min-height:80px;padding-top:8px;padding-bottom:8px}
+.brand{font-family:var(--serif);font-size:24px;font-weight:600;color:var(--ink);text-decoration:none}
+.nav{display:flex;flex-wrap:wrap;column-gap:32px;font-weight:500}
+.nav a{color:var(--ink);text-decoration:none;min-height:44px;display:flex;align-items:center}
+.nav a:hover{color:var(--teal);text-decoration:underline}
+.hero{padding:64px 0 48px}
+.eyebrow{font-size:14px;font-weight:600;letter-spacing:.08em;color:var(--teal)}
+.hero h1{font-size:clamp(32px,4.6vw,54px);line-height:1.08;letter-spacing:-.01em;margin:20px 0}
+.lead{font-size:clamp(17px,1.6vw,20px);color:var(--muted);max-width:760px}
+.meta{display:flex;flex-wrap:wrap;gap:10px;margin-top:24px}
+.badge{display:inline-flex;align-items:center;min-height:28px;padding:2px 12px;border-radius:999px;font-size:13px;font-weight:600;border:1px solid transparent}
+.badge.sim{background:#FFF4DE;color:#6B4700;border:1px dashed #C9B48A}
+.badge.summary{background:#ECE8DF;color:#3A3F4A;border-color:var(--line-2)}
+.band{background:var(--surface);border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
+.section{padding:64px 0}
+.section h2{font-size:clamp(26px,3vw,36px);margin-bottom:20px}
+.section h3{font-size:22px;margin:32px 0 10px}
+.section p{font-size:17px;line-height:1.65;color:var(--ink-2);margin-bottom:16px}
+.section ul,.section ol{margin:0 0 18px;padding-left:22px;color:var(--ink-2);font-size:17px;line-height:1.6}
+.section li{margin-bottom:8px}
+.box{background:var(--surface-2);border:1px solid var(--line);border-radius:12px;padding:32px 36px;margin-top:28px}
+.box h2{font-size:24px;margin-bottom:14px}
+.box h3{font-size:18px;font-family:var(--sans);margin:22px 0 8px}
+.box p,.box li{font-size:16px}
+.who{background:var(--teal-soft);border-left:4px solid var(--teal);padding:18px 22px;border-radius:0 10px 10px 0;margin:24px 0}
+.who p{margin:0;font-size:16px}
+.steps{list-style:none;padding:0;margin:20px 0 0;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:16px;counter-reset:step}
+.steps li{counter-increment:step;background:var(--surface);border:1px solid var(--line);border-radius:12px;padding:18px 20px;margin:0;font-size:15px;color:var(--muted)}
+.steps li strong{display:block;font-family:var(--serif);font-size:19px;color:var(--ink);margin-bottom:6px}
+.steps li strong::before{content:counter(step) ". ";color:var(--teal)}
+.tablewrap{overflow-x:auto;-webkit-overflow-scrolling:touch;margin:20px 0 28px}
+table{width:100%;min-width:640px;border-collapse:collapse;font-size:15px}
+.walk table{min-width:0}
+th,td{text-align:left;vertical-align:top;padding:12px 14px;border-bottom:1px solid var(--line);color:var(--ink-2)}
+th{font-size:13px;font-weight:600;letter-spacing:.04em;color:var(--muted-2);background:var(--surface-2)}
+td:first-child{font-weight:600;color:var(--ink)}
+.limits{border:1.5px dashed #C9B48A;background:#FFF9EE;border-radius:12px;padding:24px 28px;margin-top:28px}
+.limits h3{margin-top:0;font-family:var(--sans);font-size:18px}
+.limits li{font-size:15px}
+.walk{background:var(--surface-2);border:1px solid var(--line);border-radius:12px;padding:28px 32px}
+.walk ol{padding-left:20px}
+.walk li{margin-bottom:14px}
+.walk code,.mono{font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;font-size:14px;background:var(--chip);padding:1px 6px;border-radius:4px;color:var(--ink)}
+pre{font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;font-size:13.5px;line-height:1.5;background:#14233A;color:#E8EEF7;padding:18px 20px;border-radius:10px;overflow:auto;margin:12px 0 18px}
+.toc{display:flex;flex-wrap:wrap;gap:8px 20px;margin-top:20px;font-size:15px}
+.toc a{min-height:44px;display:inline-flex;align-items:center}
+.back{display:inline-flex;align-items:center;gap:8px;min-height:44px;padding:0 16px 0 12px;border-radius:8px;border:1.5px solid var(--line-2);color:var(--ink);text-decoration:none;font-weight:600;background:var(--surface)}
+.back:hover{border-color:var(--ink);color:var(--ink)}
+.contact{background:var(--ink);color:#fff;padding:64px 0 40px}
+.contact a{color:#9FDCD3}.contact a:hover{color:#fff}
+.contact h2{font-size:clamp(26px,3vw,36px);color:#fff}
+.contact p{font-size:17px;color:#D5DCE6;margin-top:16px}
+.foot{font-size:13px;color:#AEB9C8;margin-top:40px}
+@media (max-width:900px){.steps{grid-template-columns:1fr}.box{padding:24px}.walk{padding:22px}}
+@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
+</style>
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+<header class="site-header">
+  <div class="wrap">
+    <a class="brand" href="https://wesshelton.com/">Wes Shelton</a>
+    <nav class="nav" aria-label="Site">
+      <a href="https://wesshelton.com/#work">Selected Work</a>
+      <a href="https://wesshelton.com/#perplexity">Perplexity Projects</a>
+      <a href="https://wesshelton.com/#experience">Experience</a>
+      <a href="https://wesshelton.com/#how">How I Work</a>
+      <a href="https://wesshelton.com/#contact">Contact</a>
+    </nav>
+  </div>
+</header>
+
+<main id="main">
+<section class="hero">
+  <div class="wrap">
+    <a class="back" href="https://wesshelton.com/#port-h">&larr; Back to portfolio</a>
+    <p class="eyebrow" style="margin-top:28px">Independent project, July to November 2026</p>
+    <h1>Running my job search like an AI enablement engagement</h1>
+    <p class="lead">Two AI workspaces, written rules about what each one may read and change, one outcome measure, and a person approving every external action. This is the system, what the data showed, and what I changed because of it.</p>
+    <div class="meta">
+      <span class="badge sim">Personal project, not employer work</span>
+      <span class="badge summary">Described, not published as software</span>
+    </div>
+    <nav class="toc" aria-label="On this page">
+      <a href="#summary">Summary for a busy reader</a>
+      <a href="#problem">The problem</a>
+      <a href="#cycle">The engagement cycle</a>
+      <a href="#patterns">Reusable patterns</a>
+      <a href="#data">What the data showed</a>
+      <a href="#responsible">Responsible use</a>
+      <a href="#maintain">Keeping it maintainable</a>
+      <a href="#limits">Limits</a>
+      <a href="#walkthrough">Worked example</a>
+    </nav>
+  </div>
+</section>
+
+<section class="band section" id="summary">
+  <div class="wrap narrow">
+    <h2>Summary for a busy reader</h2>
+    <div class="who">
+      <p><strong>Who did what.</strong> I designed the system, wrote every rule, and approved every change. Claude Code, an AI coding assistant, wrote the scripts and the automation at my direction. I read and review those scripts; I did not write them by hand. Nobody uses this system but me, and nothing in it is production software.</p>
+    </div>
+    <p><strong>What it is.</strong> A private GitHub repository that holds my verified career facts, a job tracker, a scoring method, resume checks and a set of written procedures (skills) that two AI tools follow. Perplexity does research and reviews. Claude Code scores roles, drafts documents and keeps the tracker. A claude.ai project handles quick questions and sends anything new back as a written proposal. The tools never share a chat. Work passes between them as dated handoff notes with five required parts.</p>
+    <p><strong>Why it exists.</strong> A job search has the shape of an operations problem: postings arrive from several places, every application needs a tailored resume, every claim has to be true, and nothing should go out without a person reading it. I wanted AI to carry the repetitive reading and drafting without inventing a fact or acting for me.</p>
+    <p><strong>Four controls that do most of the work.</strong></p>
+    <ol>
+      <li><strong>Evidence before generation.</strong> A verified baseline of career facts, a register of retracted claims that overrides every draft, and an index of experiences where the ones I confirmed in person are locked so no later AI review can weaken them.</li>
+      <li><strong>A human at every external action.</strong> Nothing is submitted, sent or posted by the system. The tracker changes only from an event I state or a diff I approve, never from an email it read.</li>
+      <li><strong>One outcome number.</strong> Screens or better per ten submitted applications. Every new rule, script or skill has to say which number it moves. If it moves none, it is parked, not built.</li>
+      <li><strong>Decision records.</strong> A decision log with reasons, a dated status log, a changelog for the tracker, and a twice-monthly review that proposes at most one change the data supports.</li>
+    </ol>
+    <p><strong>The finding that changed the design.</strong> After three months I measured the system against outcomes instead of activity. My original fit score did not predict which applications got a screen; the roles I rated highest screened least. The channel (a recruiter or a person I knew, versus a cold portal) mattered more than the score. So I split the score in two (Fit, and separately Screen odds), added a decision called "apply via channel", and made a time-boxed search for a contact the first step before any cold application.</p>
+    <p><strong>What I would carry to a team.</strong> Measure one outcome from day one. Retire a rule every time you add one. Use AI for reading and drafting, and deterministic checks and commit history where you need an audit trail. Keep a person at every action that reaches someone else.</p>
+  </div>
+</section>
+
+<section class="section" id="problem">
+  <div class="wrap narrow">
+    <h2>The problem</h2>
+    <p>By mid-2026 I was running a three-lane search (AI enablement, HR and benefits technology, benefits operations) with help from AI tools, and I had the problems any team gets when it adopts AI quickly. Drafts were fast, and sometimes wrong in ways that looked right. A resume once carried a figure I had withdrawn weeks earlier. A tracker lived in one tool, the facts in another, and the two drifted. I could not say which of my choices were producing interviews, because I was tracking activity, not results.</p>
+    <p>I treated it the way I would treat an intake from a team at work: write down the current workflow, name the users (one, me), the constraints (truthful claims, no action without approval, limited hours per week), and the baseline measure. Then design, build small, evaluate, and only then scale or stop.</p>
+  </div>
+</section>
+
+<section class="band section" id="cycle">
+  <div class="wrap">
+    <h2>The engagement cycle, applied to my own workflow</h2>
+    <p class="narrow">Each role goes through the same six steps. The steps are written down as procedures that the AI tools follow, so the method is reusable and the output is predictable.</p>
+    <ol class="steps">
+      <li><strong>Intake</strong> Paste the posting. Confirm the apply route is live and tag the posting's age. Pull the requirements into a line-by-line table.</li>
+      <li><strong>Brief</strong> Grade every requirement against the full verified career: strong, undersold, partial, verify, or missing. List what is undersold. Record open questions and knockouts.</li>
+      <li><strong>Score and decide</strong> Compute Fit from evidence coverage, location and pay. Read Screen odds separately. Apply the gates (a suspected knockout forces review). Decide: apply, apply via channel, review, or skip.</li>
+      <li><strong>Channel first</strong> About fifteen minutes looking for a referral, recruiter or warm contact before any cold application. The result is recorded either way. Finding nobody never blocks the application.</li>
+      <li><strong>Build and check</strong> Tailor the resume from the evidence table. Run the coverage check (verified experience the posting asks for but the draft left out), the claim scan (retracted or blocked wording) and the applicant-tracking-system read (reading order, headings, basics in the top third).</li>
+      <li><strong>Record and learn</strong> I submit. The tracker gets one row with the score version, the channel, and the date, in a tag grammar a script can read back. Outcomes are compared with scores on the 1st and 15th.</li>
+    </ol>
+  </div>
+</section>
+
+<section class="section" id="patterns">
+  <div class="wrap">
+    <h2>Reusable patterns</h2>
+    <p class="narrow">These are the pieces I would expect to transfer to a team adopting AI, with the problem each one answers here.</p>
+    <div class="tablewrap">
+    <table>
+      <thead><tr><th>Pattern</th><th>What it does in this system</th><th>Where a team would use it</th></tr></thead>
+      <tbody>
+        <tr><td>Source of truth, then a register of what is withdrawn</td><td>A versioned facts file sets the scope every claim may be used at. A retracted-claims register overrides it and every earlier draft, and bans restating or rounding a withdrawn figure. A third file holds claims in use that still need a source.</td><td>Any assistant that writes about an organization's people, numbers or policies.</td></tr>
+        <tr><td>Locked rows</td><td>Facts I confirmed in person are marked locked. A later review, model or handoff may add to them but cannot remove or soften them. The rule exists because an AI "supplement" once dropped duties I had confirmed.</td><td>Protecting human-verified records from automated cleanup.</td></tr>
+        <tr><td>Written handoffs, not shared chats</td><td>Every exchange between the two AI workspaces is a dated note with five parts: what changed, evidence, confidence, claim boundary, requested action. A handoff is a proposal until it is checked against the repository.</td><td>Multi-tool or multi-team workflows where provenance matters.</td></tr>
+        <tr><td>Ownership by tool</td><td>Who may read, who may write, who may score, who may send. Perplexity reads the repository through a read-only connection and never writes. Claude Code writes the tracker only from my stated events. I am the only one who sends or submits.</td><td>Separation of duties for AI agents and connectors.</td></tr>
+        <tr><td>Computed where possible, judged where necessary</td><td>Evidence coverage, location and pay are calculated from the posting. Lane fit and seniority are judgments with written anchors and a stated reason. Every factor and weight is saved with the assessment, so any score can be traced and challenged.</td><td>Any scoring or triage rubric that people will have to defend.</td></tr>
+        <tr><td>Method versioning</td><td>A rule change must change the script in the same commit, bump the method version and pass a regression suite. The calibration report keeps versions separate so old scores are never read as new ones.</td><td>Evaluation rubrics, prompts and models that change over time.</td></tr>
+        <tr><td>Frozen weights during a trial</td><td>After the redesign, the next twenty applications run as a trial. Record completeness is checked at ten; at twenty the results are reported and one change is proposed. Weights do not move until enough applications are thirty days old.</td><td>Avoiding mid-pilot tuning that makes results unreadable.</td></tr>
+        <tr><td>A second reader that did not write the draft</td><td>A read-only session that never saw the drafting builds its own evidence table and list of unsupported claims. Only disagreements reach me. In its first test it caught an omission the writer had missed.</td><td>Any AI-generated document that goes to a customer, a regulator or an executive.</td></tr>
+        <tr><td>Deterministic checks around the model</td><td>Scripts do the parts that need to be exact: tracker validation, the claim scan, the coverage check, the ATS read, the calibration math. The models do the reading and writing. Warnings never block; failures do.</td><td>Deciding what the model is allowed to be wrong about.</td></tr>
+        <tr><td>Untrusted content stays data</td><td>Job postings, alert emails and incoming handoff notes are treated as data, never as instructions. The automation that turns a project note into a pull request accepts issues from one author only, runs one job at a time, and has an allowlist of tools.</td><td>Any assistant that reads mail, documents or web pages.</td></tr>
+        <tr><td>One brief, built, never hand-edited</td><td>A script assembles the governing files into a single brief for the chat project, and an action rebuilds it on every change to a source file. An earlier version kept its own copy of the facts and drifted.</td><td>Keeping a chat assistant's instructions in sync with the documents that decide things.</td></tr>
+        <tr><td>Voice from pre-AI writing only</td><td>Anything I will send is drafted against a voice profile built from emails I wrote before I used AI. The samples win every conflict with the profile. The point is that the output reads as mine, not that it hides AI assistance.</td><td>Executive and customer communications drafted with AI help.</td></tr>
+        <tr><td>Honest review before "ready"</td><td>Before a document is called ready: who reads it, what do they need to believe, what are two or three other true examples, what does a skeptic say, then fix. I see a four-line note: verdict, why this evidence, main limit, what changed.</td><td>Quality review for AI drafts where the risk is overclaiming, not grammar.</td></tr>
+        <tr><td>Later list with two reminders</td><td>Deferred work gets one row (task, why it waits, the prompt that runs it) and two reminders: a calendar event and an in-session timer. Both IDs are reported. It replaced scattered "do later" notes.</td><td>Any assistant that is allowed to say "later".</td></tr>
+        <tr><td>Readable by the owner</td><td>Scripts stay short and commented in plain words. A learning app teaches SQL and Python from the real scoring code, so I can read what was built for me.</td><td>Enablement: the person who owns a tool should be able to read it.</td></tr>
+      </tbody>
+    </table>
+    </div>
+  </div>
+</section>
+
+<section class="band section" id="data">
+  <div class="wrap narrow">
+    <h2>What the data showed, and what I changed</h2>
+    <p>Three months in, I compared stored scores with real outcomes. Two findings held up.</p>
+    <ul>
+      <li><strong>The fit score did not predict results.</strong> The roles my rubric rated highest were the least likely to lead to a screen. The score measured how much I wanted the role, not how a screener would read my application.</li>
+      <li><strong>The channel mattered more than the score.</strong> Applications that went through a recruiter or a personal contact got responses far more often than cold portal applications.</li>
+    </ul>
+    <p>Four changes followed, each logged with its reason.</p>
+    <ul>
+      <li><strong>Two scores instead of one.</strong> Fit (is this role right for me) and Screen odds (will a screener pull this application), with a new decision, "apply via channel", for roles worth pursuing only with a referral or recruiter first.</li>
+      <li><strong>One number decides.</strong> Every new script, skill or rule now has to name how it moves one metric: screens per ten applications. If it moves nothing, it goes to a parking lot.</li>
+      <li><strong>Computed factors with an audit trail.</strong> Requirement coverage, location and pay are calculated from the posting. The judgment calls are written down with reasons, so any score can be traced.</li>
+      <li><strong>Cleanup before any new feature.</strong> When scoring moved from one tool to the other, an audit found a dozen places in the procedure library that still described the old owner. I fixed the rules, retired two outdated skills, and only then built anything new.</li>
+    </ul>
+    <p>The redesign is still being measured. Weights are frozen through a twenty-application trial, and the question "does the new scoring predict screens better than the old one" gets answered when the sample is large enough to mean something. I report the method here, not a result I do not have yet.</p>
+  </div>
+</section>
+
+<section class="section" id="responsible">
+  <div class="wrap narrow">
+    <h2>Responsible use, in practice</h2>
+    <ul>
+      <li><strong>Truthful claims are enforced, not requested.</strong> A build fails if the resume text contains a blocked figure. A lint step flags proof text that breaks a stated boundary. "Piloted" is never allowed to become "deployed".</li>
+      <li><strong>No manipulation of screening systems.</strong> No hidden text, no keyword lists, no inflated years or altered titles. The ATS check tests reading order and findability of real qualifications, and it is labeled a formatting read, not a prediction of passing.</li>
+      <li><strong>Minimal data.</strong> Form checks use only the fields I paste (experience, education, skills, screening answers), never identity or demographic answers. Collaborators are credited by role, not by name. Employer internals stay out of public copy, including this page.</li>
+      <li><strong>The person sends.</strong> No auto-apply, no auto-send, no status inferred from an email or from silence.</li>
+      <li><strong>Public content is reviewed like a hiring manager would.</strong> A scheduled review reads my site, GitHub and LinkedIn as a stranger and lists what to fix or hide. It has already pulled work that promised more than it held.</li>
+    </ul>
+  </div>
+</section>
+
+<section class="band section" id="maintain">
+  <div class="wrap narrow">
+    <h2>Keeping it maintainable</h2>
+    <ul>
+      <li><strong>Delete before you add.</strong> Every addition names what it retires. Superseded rules are archived, never left live beside the new one.</li>
+      <li><strong>A value gate, asked once.</strong> Before any build: which number does it move, what does it retire, and how much of my time does it cost. Asked at the start, never in the middle of work.</li>
+      <li><strong>Bounded runs.</strong> Finish the requested unit in one pass, reuse what exists, ask before expanding scope, stop when the result is verified and usable.</li>
+      <li><strong>A review on the 1st and 15th.</strong> Run the calibration, read the logs, propose at most one change the data supports. I approve; it is logged. The first review's finding was "read the dip as timing, not a trend", and it proposed a data fix rather than a scoring change.</li>
+      <li><strong>Everything on a branch is invisible.</strong> The chat project reads the main branch only, so work is merged or it does not exist. A status log at the root records what changed and when.</li>
+    </ul>
+  </div>
+</section>
+
+<section class="section" id="limits">
+  <div class="wrap narrow">
+    <h2>Limits, stated plainly</h2>
+    <div class="limits">
+      <h3>What this does not show</h3>
+      <ul>
+        <li>It is personal work with one user. There are no faculty, staff or customers, and no adoption to measure.</li>
+        <li>I did not write the code. I specified it, read it, reviewed each change and set the rules it enforces. An AI coding assistant wrote the scripts and the automation.</li>
+        <li>It is not a product. A separate, scrubbed version for other people is a proposal that has not passed its usability or privacy tests, so it is not published.</li>
+        <li>The outcome measure is small-sample and still running. I describe the method and the direction of the findings, not a result.</li>
+        <li>Figures, employer names, recruiter names and the tracker itself stay private. This page describes the system; it does not expose its records.</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<section class="band section" id="walkthrough">
+  <div class="wrap narrow">
+    <h2>Worked example, one role end to end</h2>
+    <p>The posting, employer and numbers below are made up to show the shape of the output. Real assessments live in the private repository.</p>
+    <div class="walk">
+      <ol>
+        <li><strong>Intake.</strong> I paste a posting for a "Benefits Technology Analyst" at a fictional regional health plan. The procedure confirms the apply link is live, notes the posting is nine days old (tag: STANDARD), and pulls fourteen requirement lines into a table.</li>
+        <li><strong>Brief.</strong> Three sample rows from the table:
+          <table>
+            <thead><tr><th>Requirement</th><th>Proof from the verified career</th><th>Grade</th></tr></thead>
+            <tbody>
+              <tr><td>Test HRIS configuration changes before release</td><td>Written UAT checklists for a benefits system over several years</td><td>Strong</td></tr>
+              <tr><td>Document processes for a benefits team</td><td>Job aids written for recurring benefits tasks at handover</td><td>Undersold (true, but not on the current resume)</td></tr>
+              <tr><td>Administer a specific vendor's platform</td><td>Not in the record</td><td>Missing</td></tr>
+            </tbody>
+          </table>
+          Open question recorded: the posting says "configure", and my record says "test". That is a verify item, not an assumption.</li>
+        <li><strong>Score and decide.</strong> The script refuses to run until every grade and judgment field is filled. Output (fictional):
+<pre>Fit 7.5 (raw 7.4)   Screen odds: Medium
+Gates: 1 basic graded VERIFY (configuration vs testing)
+Pay: not posted -> verify
+Decision: APPLY VIA CHANNEL
+Before you apply: channel check . . . . not recorded  WARNING</pre>
+        </li>
+        <li><strong>Channel first.</strong> Fifteen minutes. A former colleague works at the plan's parent company. A short message is drafted in my voice; I decide whether to send it, and I send it myself. The tracker records <code>channel-check=contact-found</code> either way.</li>
+        <li><strong>Build and check.</strong> The resume is tailored from the table. The coverage check prints one line: <code>MISSING: job-aids (triggered by "document processes")</code>, so the job-aids bullet goes back in. The claim scan passes. The ATS read reports five of six basic qualifications in the top third and one date in the wrong format, which gets fixed.</li>
+        <li><strong>Second reader.</strong> A read-only session that never saw the draft rebuilds the evidence table from the files alone and lists any claim it cannot support. It agrees on thirteen lines and flags one undersold item I had not used. I decide whether to add it.</li>
+        <li><strong>Record.</strong> I submit through the contact's referral link and say so. One tracker row is written after the validator passes:
+<pre>[SCORE v2.3 2026-11-06] Fit 7.5 (raw 7.4); odds Medium; APPLY VIA CHANNEL
+[SUBMIT 2026-11-06] channel=referral; screening-questions=3; channel-check=contact-found; effort=noted</pre>
+        </li>
+        <li><strong>Learn.</strong> On the 1st and 15th the calibration report reads these tags back and groups outcomes by score version, fit band, odds tier and channel. One number is reported, with the pending count beside it, and at most one change is proposed.</li>
+      </ol>
+    </div>
+  </div>
+</section>
+</main>
+
+<section class="contact" aria-labelledby="cs-contact-h">
+  <div class="wrap narrow">
+    <h2 id="cs-contact-h">Questions about the method are welcome.</h2>
+    <p>I am glad to walk through any part of this, including the parts that did not work. <a href="https://wesshelton.com/#contact">Contact details are on the main page.</a></p>
+    <p class="foot">Tools named: Perplexity, Claude Code, a claude.ai project, GitHub and GitHub Actions, Google Calendar. Built with AI assistance: Claude Code wrote the scripts and automation at my direction. Last updated November 2026.</p>
+  </div>
+</section>
+<script data-goatcounter="https://wes-portfolio.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
+</body>
+</html>
