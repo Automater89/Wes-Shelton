@@ -25,7 +25,7 @@
 html{scroll-behavior:smooth}
 body{margin:0;background:var(--bg);color:var(--ink);font-family:var(--sans);font-size:16px;line-height:1.6}
 a{color:var(--teal)} a:hover{color:var(--teal-dark)}
-a:focus-visible,summary:focus-visible{outline:3px solid var(--teal);outline-offset:3px;border-radius:4px}
+a:focus-visible,summary:focus-visible,.tablewrap:focus-visible{outline:3px solid var(--teal);outline-offset:3px;border-radius:4px}
 h1,h2,h3,h4{font-family:var(--serif);font-weight:600;margin:0;line-height:1.15}
 p{margin:0}
 .wrap{max-width:1200px;margin:0 auto;padding:0 24px}
@@ -59,9 +59,24 @@ p{margin:0}
 .toc a{min-height:44px;display:inline-flex;align-items:center}
 .back{display:inline-flex;align-items:center;gap:8px;min-height:44px;padding:0 16px 0 12px;border-radius:8px;border:1.5px solid var(--line-2);color:var(--ink);text-decoration:none;font-weight:600;background:var(--surface)}
 .back:hover{border-color:var(--ink);color:var(--ink)}
-.diagram{background:var(--surface);border:1px solid var(--line);border-radius:12px;padding:16px;margin:8px 0 20px}
-.diagram svg{display:block;width:100%;height:auto}
-.caption{font-size:14px;color:var(--muted-2);margin-top:-6px}
+.diagram{background:var(--surface);border:1px solid var(--line);border-radius:12px;padding:24px;margin:8px 0 20px}
+.diagram-track+.diagram-track{border-top:1px solid var(--line);margin-top:24px;padding-top:24px}
+.diagram .diagram-track h3{font-family:var(--sans);font-size:18px;margin:0 0 16px}
+.flow-row{display:grid;grid-template-columns:minmax(0,1fr) 76px minmax(0,1fr) 76px minmax(0,1fr);align-items:center;gap:12px}
+.flow-node{min-width:0;border:1px solid var(--line-2);border-radius:8px;background:var(--surface-2);padding:16px}
+.flow-node strong{display:block;font-size:16px;line-height:1.4;margin-bottom:6px;color:var(--ink)}
+.flow-node span{display:block;font-size:14px;line-height:1.5;color:var(--muted)}
+.flow-node.human{background:var(--ink);border-color:var(--ink)}
+.flow-node.human strong{color:#fff}.flow-node.human span{color:#D5DCE6}
+.flow-node.model{background:var(--teal-soft)}
+.flow-edge{font-size:13px;font-weight:600;text-align:center;color:var(--muted)}
+.flow-edge::after{content:"\2192";display:block;font-size:24px;line-height:1.1;margin-top:4px}
+.flow-outcomes{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px;margin-top:16px}
+.flow-outcome{border:1px solid var(--line);border-radius:8px;padding:16px;background:var(--surface-2)}
+.flow-outcome strong{display:block;font-size:15px;margin-bottom:6px;color:var(--ink)}
+.flow-outcome span{display:block;font-size:14px;line-height:1.5;color:var(--muted)}
+.diagram .diagram-note{font-size:14px;margin:14px 0 0;color:var(--muted)}
+.diagram figcaption{border-top:1px solid var(--line);padding-top:16px;margin-top:24px;font-size:14px;color:var(--muted)}
 .decisions{list-style:none;padding:0;margin:8px 0 0;display:grid;gap:16px}
 .decisions li{background:var(--surface);border:1px solid var(--line);border-radius:12px;padding:20px 24px;margin:0}
 .decisions h3{font-size:19px;margin:0 0 8px}
@@ -101,6 +116,12 @@ pre{font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;font-size:1
 .contact p{font-size:17px;color:#D5DCE6;margin-top:16px}
 .foot{font-size:13px;color:#AEB9C8;margin-top:36px}
 @media (max-width:900px){.steps,.panel{grid-template-columns:1fr}}
+@media (max-width:700px){
+  .diagram{padding:16px}
+  .flow-row,.flow-outcomes{grid-template-columns:minmax(0,1fr)}
+  .flow-edge{display:flex;align-items:center;justify-content:center;gap:8px}
+  .flow-edge::after{content:"\2193";margin:0}
+}
 @media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
 </style>
 </head>
@@ -151,80 +172,53 @@ pre{font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;font-size:1
     <div class="who">
       <p><strong>Who did what.</strong> I designed the system, wrote every rule and approved every change. Claude Code, an AI coding assistant, wrote the scripts and the automation at my direction. I read and review those scripts; I didn't write them by hand. I'm the only user and none of it is production software.</p>
     </div>
-    <p><strong>Where the evidence stands.</strong> The controls below were tested on 2026-11-06 with real script runs on made-up inputs, and the outputs are quoted as they came out, including one miss. The job-search findings are observations from a small, private sample. I report them as direction. The counts stay private.</p>
+    <p><strong>Where the evidence stands.</strong> The control tests below are included in the Weekly November 2nd Review. They use real script runs on synthetic inputs. The quoted outputs include one missed claim. The job-search findings come from a small, private sample. I report them as directional observations and keep the counts private.</p>
   </div>
 </section>
 
 <section class="section" id="map">
-  <div class="wrap narrow">
+  <div class="wrap">
     <h2>How the pieces fit</h2>
-    <p>Four kinds of thing, kept apart on purpose: what I do, what the models do, what scripts check, and what is stored. Arrows show who may write to what.</p>
-    <div class="diagram" role="img" aria-label="Diagram with four lanes. Me: I paste the posting, I approve diffs and drafts, I send and submit. AI tools: Perplexity reads the repository and never writes; Claude Code scores, drafts and writes the tracker only from events I state; a chat project answers questions and sends proposals back as handoff notes. Scripts: tracker validator, claim scan, coverage check, ATS read, calibration report; a failure stops the write, a warning comes to me. Files in one private repository: verified facts, retracted-claims register, experience index with locked rows, tracker CSV, decision log and status log.">
-<svg viewBox="0 0 960 400" xmlns="http://www.w3.org/2000/svg" font-family="IBM Plex Sans, system-ui, sans-serif" font-size="13">
-  <defs><marker id="a" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="#5A6372"/></marker></defs>
-  <!-- lane labels -->
-  <g fill="#5A6372" font-weight="600" font-size="12" letter-spacing=".06em">
-    <text x="12" y="34">ME (HUMAN)</text>
-    <text x="12" y="134">AI TOOLS</text>
-    <text x="12" y="234">SCRIPTS (EXACT CHECKS)</text>
-    <text x="12" y="334">FILES (PRIVATE REPO)</text>
-  </g>
-  <g stroke="#E3DED3"><line x1="0" y1="90" x2="960" y2="90"/><line x1="0" y1="190" x2="960" y2="190"/><line x1="0" y1="290" x2="960" y2="290"/></g>
-  <!-- Me -->
-  <g fill="#14233A">
-    <rect x="200" y="14" width="170" height="52" rx="8" fill="#14233A"/><text x="285" y="36" text-anchor="middle" fill="#fff" font-weight="600">Paste the posting</text><text x="285" y="54" text-anchor="middle" fill="#D5DCE6" font-size="12">state events in my words</text>
-    <rect x="420" y="14" width="190" height="52" rx="8" fill="#14233A"/><text x="515" y="36" text-anchor="middle" fill="#fff" font-weight="600">Approve diffs and drafts</text><text x="515" y="54" text-anchor="middle" fill="#D5DCE6" font-size="12">or send them back</text>
-    <rect x="660" y="14" width="190" height="52" rx="8" fill="#14233A"/><text x="755" y="36" text-anchor="middle" fill="#fff" font-weight="600">Send and submit</text><text x="755" y="54" text-anchor="middle" fill="#D5DCE6" font-size="12">only I do this</text>
-  </g>
-  <!-- AI tools -->
-  <g>
-    <rect x="200" y="112" width="170" height="56" rx="8" fill="#EEF6F4" stroke="#9CCFC7"/><text x="285" y="134" text-anchor="middle" font-weight="600" fill="#0B4F4F">Perplexity</text><text x="285" y="152" text-anchor="middle" font-size="12" fill="#26324A">research and review, read-only</text>
-    <rect x="420" y="112" width="190" height="56" rx="8" fill="#EEF6F4" stroke="#9CCFC7"/><text x="515" y="134" text-anchor="middle" font-weight="600" fill="#0B4F4F">Claude Code</text><text x="515" y="152" text-anchor="middle" font-size="12" fill="#26324A">scores, drafts, writes the tracker</text>
-    <rect x="660" y="112" width="190" height="56" rx="8" fill="#EEF6F4" stroke="#9CCFC7"/><text x="755" y="134" text-anchor="middle" font-weight="600" fill="#0B4F4F">Chat project</text><text x="755" y="152" text-anchor="middle" font-size="12" fill="#26324A">questions; proposals back as notes</text>
-  </g>
-  <!-- Scripts -->
-  <g>
-    <rect x="200" y="212" width="130" height="50" rx="8" fill="#FFFFFF" stroke="#CFC8BA"/><text x="265" y="233" text-anchor="middle" font-weight="600">Tracker validator</text><text x="265" y="250" text-anchor="middle" font-size="12" fill="#5A6372">fail stops the write</text>
-    <rect x="345" y="212" width="120" height="50" rx="8" fill="#FFFFFF" stroke="#CFC8BA"/><text x="405" y="233" text-anchor="middle" font-weight="600">Claim scan</text><text x="405" y="250" text-anchor="middle" font-size="12" fill="#5A6372">fail stops the build</text>
-    <rect x="480" y="212" width="125" height="50" rx="8" fill="#FFFFFF" stroke="#CFC8BA"/><text x="542" y="233" text-anchor="middle" font-weight="600">Coverage check</text><text x="542" y="250" text-anchor="middle" font-size="12" fill="#5A6372">warns me</text>
-    <rect x="620" y="212" width="105" height="50" rx="8" fill="#FFFFFF" stroke="#CFC8BA"/><text x="672" y="233" text-anchor="middle" font-weight="600">ATS read</text><text x="672" y="250" text-anchor="middle" font-size="12" fill="#5A6372">warns me</text>
-    <rect x="740" y="212" width="110" height="50" rx="8" fill="#FFFFFF" stroke="#CFC8BA"/><text x="795" y="233" text-anchor="middle" font-weight="600">Calibration</text><text x="795" y="250" text-anchor="middle" font-size="12" fill="#5A6372">1st and 15th</text>
-  </g>
-  <!-- Files -->
-  <g>
-    <rect x="200" y="312" width="120" height="50" rx="8" fill="#FBFAF7" stroke="#CFC8BA"/><text x="260" y="333" text-anchor="middle" font-weight="600">Verified facts</text><text x="260" y="350" text-anchor="middle" font-size="12" fill="#5A6372">versioned</text>
-    <rect x="335" y="312" width="140" height="50" rx="8" fill="#FBFAF7" stroke="#CFC8BA"/><text x="405" y="333" text-anchor="middle" font-weight="600">Retracted claims</text><text x="405" y="350" text-anchor="middle" font-size="12" fill="#5A6372">overrides every draft</text>
-    <rect x="490" y="312" width="140" height="50" rx="8" fill="#FBFAF7" stroke="#CFC8BA"/><text x="560" y="333" text-anchor="middle" font-weight="600">Experience index</text><text x="560" y="350" text-anchor="middle" font-size="12" fill="#5A6372">locked rows</text>
-    <rect x="645" y="312" width="95" height="50" rx="8" fill="#FBFAF7" stroke="#CFC8BA"/><text x="692" y="333" text-anchor="middle" font-weight="600">Tracker</text><text x="692" y="350" text-anchor="middle" font-size="12" fill="#5A6372">one CSV</text>
-    <rect x="755" y="312" width="95" height="50" rx="8" fill="#FBFAF7" stroke="#CFC8BA"/><text x="802" y="333" text-anchor="middle" font-weight="600">Logs</text><text x="802" y="350" text-anchor="middle" font-size="12" fill="#5A6372">decisions, status</text>
-  </g>
-  <!-- arrows -->
-  <g stroke="#5A6372" stroke-width="1.6" fill="none" marker-end="url(#a)">
-    <path d="M285 66 V112"/>
-    <path d="M515 66 V112"/>
-    <path d="M515 168 V212"/>
-    <path d="M285 168 V212"/>
-    <path d="M405 262 V312"/>
-    <path d="M265 262 V312"/>
-    <path d="M755 168 H640 V190" stroke-dasharray="5 4"/>
-    <path d="M560 262 V312" stroke-dasharray="5 4"/>
-    <path d="M692 262 V312" stroke-dasharray="5 4"/>
-    <path d="M795 262 V312" stroke-dasharray="5 4"/>
-  </g>
-  <g font-size="11.5" fill="#5A6372">
-    <text x="292" y="92">events</text>
-    <text x="522" y="92">events, approvals</text>
-    <text x="522" y="192">writes, after checks</text>
-    <text x="292" y="192">reads only</text>
-    <text x="760" y="186">handoff notes</text>
-    <text x="412" y="292">a failure stops the save</text>
-  </g>
-  <!-- return arrow scripts -> me -->
-  <path d="M880 237 V40 H850" stroke="#0F6E6E" stroke-width="1.6" fill="none" marker-end="url(#a)" stroke-dasharray="5 4"/>
-  <text x="888" y="140" font-size="11.5" fill="#0F6E6E" transform="rotate(90 888 140)">warnings and failures come to me</text>
-</svg>
-    </div>
-    <p class="caption">Solid arrows are writes. Dashed arrows are reads or proposals. Nothing crosses from the AI lane to "send and submit."</p>
+    <p class="narrow" id="map-description">Three paths keep reading, checking and saving separate. This diagram shows the documented operating workflow. The control tests below show which behaviors were tested.</p>
+    <figure class="diagram" aria-label="AI workflow: evidence review, tracker changes and draft checks" aria-describedby="map-description map-caption">
+      <div class="diagram-track">
+        <h3>Read evidence and propose a correction</h3>
+        <div class="flow-row">
+          <div class="flow-node"><strong>Private evidence files</strong><span>Verified facts, retracted claims and the experience index.</span></div>
+          <div class="flow-edge">Read</div>
+          <div class="flow-node model"><strong>Perplexity</strong><span>Research and review. Its assigned role does not include tracker writes.</span></div>
+          <div class="flow-edge">Propose</div>
+          <div class="flow-node human"><strong>I review the findings</strong><span>I approve a proposed change or send it back.</span></div>
+        </div>
+        <p class="diagram-note">The chat project also sends dated handoff proposals for review. A proposal is not a saved change.</p>
+      </div>
+      <div class="diagram-track">
+        <h3>Validate a proposed tracker change before saving</h3>
+        <div class="flow-row">
+          <div class="flow-node human"><strong>I state an event or approve a diff</strong><span>This provides authority for the matching tracker change.</span></div>
+          <div class="flow-edge">Authorize</div>
+          <div class="flow-node model"><strong>Claude Code proposes the change</strong><span>It prepares a temporary tracker copy, not a change to the evidence files.</span></div>
+          <div class="flow-edge">Check</div>
+          <div class="flow-node"><strong>Tracker validator</strong><span>It reads the current tracker and proposed copy, then reports errors or a pass.</span></div>
+        </div>
+        <div class="flow-outcomes" role="group" aria-label="Two outcomes from the tracker validator">
+          <div class="flow-outcome"><strong>Pass: Claude saves and commits</strong><span>The procedure allows replacement of the tracker CSV and a changelog entry after a successful check.</span></div>
+          <div class="flow-outcome"><strong>Fail: return to human review</strong><span>The procedure requires stopping before replacement. The reported rejection tests do not verify complete save-path enforcement.</span></div>
+        </div>
+      </div>
+      <div class="diagram-track">
+        <h3>Check draft claims before human approval</h3>
+        <div class="flow-row">
+          <div class="flow-node"><strong>Draft and retracted-claims register</strong><span>Both are inputs. The scan does not update the register.</span></div>
+          <div class="flow-edge">Read / check</div>
+          <div class="flow-node"><strong>Claim scan</strong><span>It reports matches to blocked wording. A paraphrased claim can pass.</span></div>
+          <div class="flow-edge">Report</div>
+          <div class="flow-node human"><strong>I review, send and submit</strong><span>I review the draft and check results. Only I take the external action.</span></div>
+        </div>
+        <p class="diagram-note">Coverage and ATS checks provide warnings. Calibration reads the tracker on the 1st and 15th. Neither operation writes verified career facts.</p>
+      </div>
+      <figcaption id="map-caption">Each connector names the operation. Arrows show the flow of inputs and decisions, not shared write permission. A read-only operating role is separate from verified connector permissions. Sending and submitting remain human actions.</figcaption>
+    </figure>
   </div>
 </section>
 
@@ -246,7 +240,7 @@ pre{font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;font-size:1
         <p><span class="k">Turned down:</span> a database, a spreadsheet in a cloud drive, or a tracker inside a chat tool.</p>
         <p><span class="k">Why:</span> I'm one person. Commit history gave me backup, diff and audit for free, and it kept the tracker readable by any tool and by me. The earlier cloud spreadsheet drifted from the facts file, and I couldn't see who changed what.</p></li>
       <li><h3>Two AI workspaces, written handoffs, no shared chat</h3>
-        <p><span class="k">Chose:</span> Perplexity for research and review with read-only access; Claude Code for scoring, drafting and tracker writes; a chat project for quick questions that sends anything new back as a dated note with five required parts.</p>
+        <p><span class="k">Chose:</span> Perplexity in a read-only research and review role; Claude Code for scoring, drafting and tracker writes; a chat project for quick questions that sends anything new back as a dated note with five required parts.</p>
         <p><span class="k">Turned down:</span> one assistant that does everything, or two assistants that talk to each other directly.</p>
         <p><span class="k">Why:</span> I wanted a second opinion that had not seen the first draft, and I wanted provenance. A note that says what changed, the evidence, confidence, the claim boundary and the requested action can be checked. A chat transcript is much harder to check.</p></li>
       <li><h3>One outcome number for building; constraints that don't have to earn it</h3>
@@ -267,13 +261,13 @@ pre{font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;font-size:1
 
 <section class="section" id="tests">
   <div class="wrap narrow">
-    <h2>Control tests, run 2026-11-06</h2>
+    <h2>Control tests: Weekly November 2nd Review</h2>
     <p>Perplexity reviewed the first version of this page and said, correctly, that I had described the controls and had not shown one working. So I ran the controls on made-up inputs and quoted the output as it came out. Each row also says what kind of control it is, because a written rule and an enforced check deserve different levels of trust.</p>
-    <div class="tablewrap">
+    <div class="tablewrap" tabindex="0" role="region" aria-label="Control-test results; scroll horizontally on smaller screens">
     <table>
       <thead><tr><th>Control</th><th>Kind</th><th>Test input (made up)</th><th>What happened</th></tr></thead>
       <tbody>
-        <tr><td>Tracker validator</td><td>Deterministic check before any save</td><td>Proposed tracker with one row deleted</td><td><span class="r ok">Rejected</span> <code>row count fell from 182 to 181: rows are never deleted</code>, plus a line showing the row identities had shifted. Exit code 1; the save does not happen.</td></tr>
+        <tr><td>Tracker validator</td><td>Deterministic check required before replacement</td><td>Proposed tracker with one row deleted</td><td><span class="r ok">Rejected</span> <code>row count fell from 182 to 181: rows are never deleted</code>, plus a line showing the row identities had shifted. Exit code 1. Complete save-path enforcement is not verified by this test.</td></tr>
         <tr><td>Tracker validator</td><td>Deterministic check</td><td>An interviewing row with its stage set back to blank</td><td><span class="r ok">Rejected</span> <code>OutcomeStage interview-2+ dropped to blank; keep the highest stage and put the rejection or withdrawal in Decision</code></td></tr>
         <tr><td>Tracker validator</td><td>Deterministic check</td><td>New row marked Applied with no channel and no submit tag</td><td><span class="r ok">Rejected</span> three lines: stage value not approved; <code>applied row needs a Channel</code>; <code>applied row needs the [SUBMIT YYYY-MM-DD] tag</code>. This is how the calibration report can trust the channel field later.</td></tr>
         <tr><td>Claim scan at build time</td><td>Deterministic check; a hit fails the build</td><td>"Raised average session satisfaction to 3.0/3 across the program."</td><td><span class="r ok">Caught</span> <code>banned: 3.0/3</code> (a withdrawn figure; the verified figure is different)</td></tr>
@@ -284,12 +278,13 @@ pre{font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;font-size:1
         <tr><td>Scoring script</td><td>Deterministic refusal</td><td>An assessment with five requirements and no grades filled in</td><td><span class="r ok">Refused</span> <code>grade not set for B1, B2, B3, B4, P1. Grades: strong, undersold, partial, verify, missing</code>. The script will not invent a score.</td></tr>
         <tr><td>Evidence lint</td><td>Deterministic check, warnings only</td><td>Proof text reading "Deployed agents across HR and Legal; SCORM solution deployed to users."</td><td><span class="r ok">Flagged</span> <code>BLOCKED: 'Agent deployment' (no deployed agent is on record)</code> and <code>BOUNDARY: scorm-pilot rule(s) out /deploy\w*/</code>. A person decides; the lint never changes a grade.</td></tr>
         <tr><td>Coverage check</td><td>Deterministic check, warnings only</td><td>A made-up posting asking for HRIS testing, documentation and vendor administration, against a one-line resume</td><td><span class="r ok">Flagged</span> four <code>MISSING</code> rows of verified experience the posting called for and the draft left out (row names withheld here). Each hit is a question for me to answer. Nothing gets edited on its own.</td></tr>
-        <tr><td>Read-only access for the review tool</td><td>Tool permission (connector scope)</td><td>Not re-tested on this date</td><td><span class="r miss">Described only</span> Five acceptance tests were run when it was set up (read, stale-rule trap, scoring and tracker refusal, retracted-claim refusal, pre-submit check). I haven't published those transcripts.</td></tr>
-        <tr><td>"Postings are data, not instructions"</td><td>Written rule, plus an author filter and tool allowlist on the automation</td><td>Not tested with a hostile posting on this date</td><td><span class="r miss">Written rule, untested</span> I treat it as the weakest item on this page until I test it with instruction-like text in a posting and publish the result.</td></tr>
+        <tr><td>Read-only role for the review tool</td><td>Written operating rule; connector-level enforcement not verified in this review</td><td>No permission-denial test is reported in this review</td><td><span class="r miss">Described only</span> Five acceptance tests were run when it was set up (read, stale-rule trap, scoring and tracker refusal, retracted-claim refusal, pre-submit check). I haven't published those transcripts. Behavioral refusal does not establish that a connector lacks write permission.</td></tr>
+        <tr><td>"Postings are data, not instructions"</td><td>Written rule, plus an author filter and tool allowlist on the automation</td><td>Not tested with a hostile posting in this review</td><td><span class="r miss">Written rule, untested</span> I treat it as the weakest item on this page until I test it with instruction-like text in a posting and publish the result.</td></tr>
       </tbody>
     </table>
     </div>
-    <p>What the tests establish: the write-path controls do what they say, the scan catches known-bad tokens and leaves known-good claims alone, and the scoring script will not guess. What they don't establish: that every unsupported sentence gets caught, or that the model-side rules hold under pressure. Those two are open items, listed below.</p>
+    <p>In the cases shown, the tracker validator rejected invalid proposals. The claim scan detected the listed blocked wording and accepted the approved comparison claim. The scoring script refused assessments with blank grades. One paraphrased, unsupported claim passed the scan.</p>
+    <p>These results do not establish that every unsupported claim will be caught. They do not establish that model-side rules will hold under hostile input.</p>
   </div>
 </section>
 
@@ -299,7 +294,7 @@ pre{font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;font-size:1
     <p>Three different levels of confidence, kept in three boxes so they don't blend into one success claim.</p>
     <div class="panel">
       <div><h3>Tested</h3><ul>
-        <li>Tracker writes are validated and a bad proposal is rejected before saving (three cases above).</li>
+        <li>The tracker validator rejected the three invalid proposals shown above. These tests do not verify the complete save path.</li>
         <li>The claim scan catches withdrawn figures, forecasts worded as results, a pilot called deployed, and hedged metric words.</li>
         <li>The scoring script refuses to run with blank grades.</li>
         <li>Lint and coverage checks flag blocked wording and left-out evidence as questions for me.</li>
@@ -409,7 +404,7 @@ Before you apply: channel check . . . . not recorded  WARNING</pre>
         <li>I didn't write the code. I specified it, read it, reviewed each change and set the rules it enforces.</li>
         <li>It isn't a product. A scrubbed version for other people is a proposal that hasn't passed its usability or privacy tests, so it isn't published.</li>
         <li>The outcome measure is a small sample and still running. I describe direction, and I keep the counts private.</li>
-        <li>Two controls on this page are written rules I haven't tested, and one check has a known gap. All three are named above.</li>
+        <li>Perplexity is assigned a read-only review role. Its earlier acceptance-test transcripts are not published here. Connector-level write restrictions are not verified in this review. The posting-as-data rule has not been tested with hostile input. The claim scan has a demonstrated paraphrase gap.</li>
       </ul>
     </div>
     <p style="margin-top:20px">Next on my list, in order: a deliberate test with instruction-like text inside a posting; minutes per application, measured; and the simpler-baseline comparison. I'll add results here when I have them, including the ones that don't flatter the system.</p>
@@ -421,7 +416,7 @@ Before you apply: channel check . . . . not recorded  WARNING</pre>
   <div class="wrap narrow">
     <h2 id="cs-contact-h">I'd welcome questions about any part of this.</h2>
     <p>Ask about any step and I'll walk you through it, including the parts that didn't work and what I changed. <a href="https://wesshelton.com/#contact">Contact details are on the main page.</a></p>
-    <p class="foot">Tools named: Perplexity, Claude Code, a claude.ai project, GitHub and GitHub Actions, Google Calendar. Built with AI assistance: Claude Code wrote the scripts and automation at my direction. Control tests run 2026-11-06 on made-up inputs; outputs quoted as produced. Last updated November 2026.</p>
+    <p class="foot">Tools named: Perplexity, Claude Code, a claude.ai project, GitHub and GitHub Actions, Google Calendar. Built with AI assistance: Claude Code wrote the scripts and automation at my direction. Weekly November 2nd Review. Control tests used synthetic inputs, and outputs are quoted as produced. Last updated November 2026.</p>
   </div>
 </section>
 <script data-goatcounter="https://wes-portfolio.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
