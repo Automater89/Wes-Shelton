@@ -133,15 +133,15 @@ pre{font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;font-size:1
   <div class="wrap narrow">
     <h2>Summary for a busy reader</h2>
     <div class="who">
-      <p><strong>Who did what.</strong> I designed the system, wrote every rule, and approved every change. Claude Code, an AI coding assistant, wrote the scripts and the automation at my direction. I read and review those scripts; I did not write them by hand. Nobody uses this system but me, and nothing in it is production software.</p>
+      <p><strong>Who did what.</strong> I designed the system, wrote every rule, and approved every change. Claude Code, an AI coding assistant, wrote the scripts and the automation at my direction. I read and review those scripts. I didn't write them by hand. I'm the only user, and none of it is production software.</p>
     </div>
     <p><strong>What it is.</strong> A private GitHub repository that holds my verified career facts, a job tracker, a scoring method, resume checks and a set of written procedures (skills) that two AI tools follow. Perplexity does research and reviews. Claude Code scores roles, drafts documents and keeps the tracker. A claude.ai project handles quick questions and sends anything new back as a written proposal. The tools never share a chat. Work passes between them as dated handoff notes with five required parts.</p>
-    <p><strong>Why it exists.</strong> A job search has the shape of an operations problem: postings arrive from several places, every application needs a tailored resume, every claim has to be true, and nothing should go out without a person reading it. I wanted AI to carry the repetitive reading and drafting without inventing a fact or acting for me.</p>
+    <p><strong>Why it exists.</strong> A job search has the shape of an operations problem: postings arrive from several places, every application needs a tailored resume, every claim has to be true, and nothing should go out without a person reading it. I wanted AI to carry the repetitive reading and drafting. I didn't want it inventing a fact or acting for me.</p>
     <p><strong>Four controls that do most of the work.</strong></p>
     <ol>
       <li><strong>Evidence before generation.</strong> A verified baseline of career facts, a register of retracted claims that overrides every draft, and an index of experiences where the ones I confirmed in person are locked so no later AI review can weaken them.</li>
       <li><strong>A human at every external action.</strong> Nothing is submitted, sent or posted by the system. The tracker changes only from an event I state or a diff I approve, never from an email it read.</li>
-      <li><strong>One outcome number.</strong> Screens or better per ten submitted applications. Every new rule, script or skill has to say which number it moves. If it moves none, it is parked, not built.</li>
+      <li><strong>One outcome number.</strong> Screens or better per ten submitted applications. Every new rule, script or skill has to say which number it moves. If it can't, it goes to a parking lot and I don't build it.</li>
       <li><strong>Decision records.</strong> A decision log with reasons, a dated status log, a changelog for the tracker, and a twice-monthly review that proposes at most one change the data supports.</li>
     </ol>
     <p><strong>The finding that changed the design.</strong> After three months I measured the system against outcomes instead of activity. My original fit score did not predict which applications got a screen; the roles I rated highest screened least. The channel (a recruiter or a person I knew, versus a cold portal) mattered more than the score. So I split the score in two (Fit, and separately Screen odds), added a decision called "apply via channel", and made a time-boxed search for a contact the first step before any cold application.</p>
@@ -152,8 +152,8 @@ pre{font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;font-size:1
 <section class="section" id="problem">
   <div class="wrap narrow">
     <h2>The problem</h2>
-    <p>By mid-2026 I was running a three-lane search (AI enablement, HR and benefits technology, benefits operations) with help from AI tools, and I had the problems any team gets when it adopts AI quickly. Drafts were fast, and sometimes wrong in ways that looked right. A resume once carried a figure I had withdrawn weeks earlier. A tracker lived in one tool, the facts in another, and the two drifted. I could not say which of my choices were producing interviews, because I was tracking activity, not results.</p>
-    <p>I treated it the way I would treat an intake from a team at work: write down the current workflow, name the users (one, me), the constraints (truthful claims, no action without approval, limited hours per week), and the baseline measure. Then design, build small, evaluate, and only then scale or stop.</p>
+    <p>By mid-2026 I was running a three-lane search (AI enablement, HR and benefits technology, benefits operations) with help from AI tools, and I had the problems any team gets when it adopts AI quickly. Drafts were fast, and sometimes wrong in ways that looked right. A resume once carried a figure I had withdrawn weeks earlier. A tracker lived in one tool, the facts in another, and the two drifted. I couldn't say which of my choices were producing interviews. I was tracking how much I did, and I had no view of what came back.</p>
+    <p>I treated it the way I'd treat an intake from a team at work: write down the current workflow, name the users (one, me), the constraints (truthful claims, no action without approval, limited hours per week), and the baseline measure. Then design, build small, evaluate, and only then scale or stop.</p>
   </div>
 </section>
 
@@ -175,25 +175,25 @@ pre{font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;font-size:1
 <section class="section" id="patterns">
   <div class="wrap">
     <h2>Reusable patterns</h2>
-    <p class="narrow">These are the pieces I would expect to transfer to a team adopting AI, with the problem each one answers here.</p>
+    <p class="narrow">These are the pieces I'd expect to carry over to a team adopting AI, with the problem each one solves here.</p>
     <div class="tablewrap">
     <table>
       <thead><tr><th>Pattern</th><th>What it does in this system</th><th>Where a team would use it</th></tr></thead>
       <tbody>
         <tr><td>Source of truth, then a register of what is withdrawn</td><td>A versioned facts file sets the scope every claim may be used at. A retracted-claims register overrides it and every earlier draft, and bans restating or rounding a withdrawn figure. A third file holds claims in use that still need a source.</td><td>Any assistant that writes about an organization's people, numbers or policies.</td></tr>
         <tr><td>Locked rows</td><td>Facts I confirmed in person are marked locked. A later review, model or handoff may add to them but cannot remove or soften them. The rule exists because an AI "supplement" once dropped duties I had confirmed.</td><td>Protecting human-verified records from automated cleanup.</td></tr>
-        <tr><td>Written handoffs, not shared chats</td><td>Every exchange between the two AI workspaces is a dated note with five parts: what changed, evidence, confidence, claim boundary, requested action. A handoff is a proposal until it is checked against the repository.</td><td>Multi-tool or multi-team workflows where provenance matters.</td></tr>
+        <tr><td>Written handoffs between tools</td><td>Every exchange between the two AI workspaces is a dated note with five parts: what changed, evidence, confidence, claim boundary, requested action. A handoff is a proposal until it is checked against the repository.</td><td>Multi-tool or multi-team workflows where provenance matters.</td></tr>
         <tr><td>Ownership by tool</td><td>Who may read, who may write, who may score, who may send. Perplexity reads the repository through a read-only connection and never writes. Claude Code writes the tracker only from my stated events. I am the only one who sends or submits.</td><td>Separation of duties for AI agents and connectors.</td></tr>
         <tr><td>Computed where possible, judged where necessary</td><td>Evidence coverage, location and pay are calculated from the posting. Lane fit and seniority are judgments with written anchors and a stated reason. Every factor and weight is saved with the assessment, so any score can be traced and challenged.</td><td>Any scoring or triage rubric that people will have to defend.</td></tr>
         <tr><td>Method versioning</td><td>A rule change must change the script in the same commit, bump the method version and pass a regression suite. The calibration report keeps versions separate so old scores are never read as new ones.</td><td>Evaluation rubrics, prompts and models that change over time.</td></tr>
         <tr><td>Frozen weights during a trial</td><td>After the redesign, the next twenty applications run as a trial. Record completeness is checked at ten; at twenty the results are reported and one change is proposed. Weights do not move until enough applications are thirty days old.</td><td>Avoiding mid-pilot tuning that makes results unreadable.</td></tr>
         <tr><td>A second reader that did not write the draft</td><td>A read-only session that never saw the drafting builds its own evidence table and list of unsupported claims. Only disagreements reach me. In its first test it caught an omission the writer had missed.</td><td>Any AI-generated document that goes to a customer, a regulator or an executive.</td></tr>
-        <tr><td>Deterministic checks around the model</td><td>Scripts do the parts that need to be exact: tracker validation, the claim scan, the coverage check, the ATS read, the calibration math. The models do the reading and writing. Warnings never block; failures do.</td><td>Deciding what the model is allowed to be wrong about.</td></tr>
-        <tr><td>Untrusted content stays data</td><td>Job postings, alert emails and incoming handoff notes are treated as data, never as instructions. The automation that turns a project note into a pull request accepts issues from one author only, runs one job at a time, and has an allowlist of tools.</td><td>Any assistant that reads mail, documents or web pages.</td></tr>
+        <tr><td>Deterministic checks around the model</td><td>Scripts do the parts that need to be exact: tracker validation, the claim scan, the coverage check, the ATS read, the calibration math. The models do the reading and writing. Warnings never block; failures do.</td><td>Drawing the line between what a script checks and what a model is trusted to judge.</td></tr>
+        <tr><td>Untrusted content stays data</td><td>Job postings, alert emails and incoming handoff notes are read as data. Nothing inside them can change a rule. The automation that turns a project note into a pull request accepts issues from one author only, runs one job at a time, and has an allowlist of tools.</td><td>Any assistant that reads mail, documents or web pages.</td></tr>
         <tr><td>One brief, built, never hand-edited</td><td>A script assembles the governing files into a single brief for the chat project, and an action rebuilds it on every change to a source file. An earlier version kept its own copy of the facts and drifted.</td><td>Keeping a chat assistant's instructions in sync with the documents that decide things.</td></tr>
-        <tr><td>Voice from pre-AI writing only</td><td>Anything I will send is drafted against a voice profile built from emails I wrote before I used AI. The samples win every conflict with the profile. The point is that the output reads as mine, not that it hides AI assistance.</td><td>Executive and customer communications drafted with AI help.</td></tr>
-        <tr><td>Honest review before "ready"</td><td>Before a document is called ready: who reads it, what do they need to believe, what are two or three other true examples, what does a skeptic say, then fix. I see a four-line note: verdict, why this evidence, main limit, what changed.</td><td>Quality review for AI drafts where the risk is overclaiming, not grammar.</td></tr>
-        <tr><td>Later list with two reminders</td><td>Deferred work gets one row (task, why it waits, the prompt that runs it) and two reminders: a calendar event and an in-session timer. Both IDs are reported. It replaced scattered "do later" notes.</td><td>Any assistant that is allowed to say "later".</td></tr>
+        <tr><td>Voice from pre-AI writing only</td><td>Anything I will send is drafted against a voice profile built from emails I wrote before I used AI. The samples win every conflict with the profile. The goal is writing that reads as mine. I say when AI helped.</td><td>Executive and customer communications drafted with AI help.</td></tr>
+        <tr><td>Honest review before "ready"</td><td>Before a document is called ready: who reads it, what do they need to believe, what are two or three other true examples, what does a skeptic say, then fix. I see a four-line note: verdict, why this evidence, main limit, what changed.</td><td>Quality review for AI drafts where the real risk is overclaiming.</td></tr>
+        <tr><td>Later list with two reminders</td><td>Deferred work gets one row (task, why it waits, the prompt that runs it) and two reminders: a calendar event and an in-session timer. Both IDs are reported. It replaced scattered "do later" notes.</td><td>Any assistant that is allowed to defer work.</td></tr>
         <tr><td>Readable by the owner</td><td>Scripts stay short and commented in plain words. A learning app teaches SQL and Python from the real scoring code, so I can read what was built for me.</td><td>Enablement: the person who owns a tool should be able to read it.</td></tr>
       </tbody>
     </table>
@@ -206,17 +206,17 @@ pre{font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;font-size:1
     <h2>What the data showed, and what I changed</h2>
     <p>Three months in, I compared stored scores with real outcomes. Two findings held up.</p>
     <ul>
-      <li><strong>The fit score did not predict results.</strong> The roles my rubric rated highest were the least likely to lead to a screen. The score measured how much I wanted the role, not how a screener would read my application.</li>
+      <li><strong>The fit score did not predict results.</strong> The roles my rubric rated highest were the least likely to lead to a screen. The score measured how much I wanted the role. It said nothing about how a screener would read my application.</li>
       <li><strong>The channel mattered more than the score.</strong> Applications that went through a recruiter or a personal contact got responses far more often than cold portal applications.</li>
     </ul>
     <p>Four changes followed, each logged with its reason.</p>
     <ul>
       <li><strong>Two scores instead of one.</strong> Fit (is this role right for me) and Screen odds (will a screener pull this application), with a new decision, "apply via channel", for roles worth pursuing only with a referral or recruiter first.</li>
-      <li><strong>One number decides.</strong> Every new script, skill or rule now has to name how it moves one metric: screens per ten applications. If it moves nothing, it goes to a parking lot.</li>
+      <li><strong>One number decides.</strong> Every new script, skill or rule now has to name how it moves one metric: screens per ten applications. If it can't, it goes to a parking lot.</li>
       <li><strong>Computed factors with an audit trail.</strong> Requirement coverage, location and pay are calculated from the posting. The judgment calls are written down with reasons, so any score can be traced.</li>
       <li><strong>Cleanup before any new feature.</strong> When scoring moved from one tool to the other, an audit found a dozen places in the procedure library that still described the old owner. I fixed the rules, retired two outdated skills, and only then built anything new.</li>
     </ul>
-    <p>The redesign is still being measured. Weights are frozen through a twenty-application trial, and the question "does the new scoring predict screens better than the old one" gets answered when the sample is large enough to mean something. I report the method here, not a result I do not have yet.</p>
+    <p>The redesign is still being measured. Weights are frozen through a twenty-application trial, and the question "does the new scoring predict screens better than the old one" gets answered when the sample is large enough to mean something. What I can report today is the method. The result comes when the sample is big enough.</p>
   </div>
 </section>
 
@@ -224,9 +224,9 @@ pre{font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;font-size:1
   <div class="wrap narrow">
     <h2>Responsible use, in practice</h2>
     <ul>
-      <li><strong>Truthful claims are enforced, not requested.</strong> A build fails if the resume text contains a blocked figure. A lint step flags proof text that breaks a stated boundary. "Piloted" is never allowed to become "deployed".</li>
-      <li><strong>No manipulation of screening systems.</strong> No hidden text, no keyword lists, no inflated years or altered titles. The ATS check tests reading order and findability of real qualifications, and it is labeled a formatting read, not a prediction of passing.</li>
-      <li><strong>Minimal data.</strong> Form checks use only the fields I paste (experience, education, skills, screening answers), never identity or demographic answers. Collaborators are credited by role, not by name. Employer internals stay out of public copy, including this page.</li>
+      <li><strong>Truthful claims are enforced by the build.</strong> A build fails if the resume text contains a blocked figure. A lint step flags proof text that breaks a stated boundary. A pilot stays a pilot in every draft; "deployed" is a blocked word for that project.</li>
+      <li><strong>No manipulation of screening systems.</strong> No hidden text, no keyword lists, no inflated years or altered titles. The ATS check tests reading order and whether real qualifications can be found. It is labeled as a formatting read. It doesn't predict whether a resume passes.</li>
+      <li><strong>Minimal data.</strong> Form checks use only the fields I paste (experience, education, skills, screening answers), never identity or demographic answers. Collaborators are credited by their role, and their names stay out. Employer internals stay out of public copy, including this page.</li>
       <li><strong>The person sends.</strong> No auto-apply, no auto-send, no status inferred from an email or from silence.</li>
       <li><strong>Public content is reviewed like a hiring manager would.</strong> A scheduled review reads my site, GitHub and LinkedIn as a stranger and lists what to fix or hide. It has already pulled work that promised more than it held.</li>
     </ul>
@@ -240,23 +240,23 @@ pre{font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;font-size:1
       <li><strong>Delete before you add.</strong> Every addition names what it retires. Superseded rules are archived, never left live beside the new one.</li>
       <li><strong>A value gate, asked once.</strong> Before any build: which number does it move, what does it retire, and how much of my time does it cost. Asked at the start, never in the middle of work.</li>
       <li><strong>Bounded runs.</strong> Finish the requested unit in one pass, reuse what exists, ask before expanding scope, stop when the result is verified and usable.</li>
-      <li><strong>A review on the 1st and 15th.</strong> Run the calibration, read the logs, propose at most one change the data supports. I approve; it is logged. The first review's finding was "read the dip as timing, not a trend", and it proposed a data fix rather than a scoring change.</li>
-      <li><strong>Everything on a branch is invisible.</strong> The chat project reads the main branch only, so work is merged or it does not exist. A status log at the root records what changed and when.</li>
+      <li><strong>A review on the 1st and 15th.</strong> Run the calibration, read the logs, propose at most one change the data supports. I approve; it is logged. The first review's finding was "read the dip as timing, not a trend." It proposed a data fix and left the scoring alone.</li>
+      <li><strong>Unmerged work doesn't count.</strong> The chat project reads the main branch only, so work is merged or the other tools never see it. A status log at the root records what changed and when.</li>
     </ul>
   </div>
 </section>
 
 <section class="section" id="limits">
   <div class="wrap narrow">
-    <h2>Limits, stated plainly</h2>
+    <h2>Limits</h2>
     <div class="limits">
       <h3>What this does not show</h3>
       <ul>
         <li>It is personal work with one user. There are no faculty, staff or customers, and no adoption to measure.</li>
-        <li>I did not write the code. I specified it, read it, reviewed each change and set the rules it enforces. An AI coding assistant wrote the scripts and the automation.</li>
-        <li>It is not a product. A separate, scrubbed version for other people is a proposal that has not passed its usability or privacy tests, so it is not published.</li>
-        <li>The outcome measure is small-sample and still running. I describe the method and the direction of the findings, not a result.</li>
-        <li>Figures, employer names, recruiter names and the tracker itself stay private. This page describes the system; it does not expose its records.</li>
+        <li>I didn't write the code. I specified it, read it, reviewed each change and set the rules it enforces. An AI coding assistant wrote the scripts and the automation.</li>
+        <li>It isn't a product. A separate, scrubbed version for other people is a proposal. It hasn't passed its usability or privacy tests, so it isn't published.</li>
+        <li>The outcome measure is a small sample and still running. I describe the method and the direction of the findings. I don't have a result to claim yet.</li>
+        <li>Figures, employer names, recruiter names and the tracker itself stay private. This page describes the system and keeps its records out.</li>
       </ul>
     </div>
   </div>
@@ -278,7 +278,7 @@ pre{font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;font-size:1
               <tr><td>Administer a specific vendor's platform</td><td>Not in the record</td><td>Missing</td></tr>
             </tbody>
           </table>
-          Open question recorded: the posting says "configure", and my record says "test". That is a verify item, not an assumption.</li>
+          Open question recorded: the posting says "configure" and my record says "test", so that line is marked verify until I can ask.</li>
         <li><strong>Score and decide.</strong> The script refuses to run until every grade and judgment field is filled. Output (fictional):
 <pre>Fit 7.5 (raw 7.4)   Screen odds: Medium
 Gates: 1 basic graded VERIFY (configuration vs testing)
@@ -302,8 +302,8 @@ Before you apply: channel check . . . . not recorded  WARNING</pre>
 
 <section class="contact" aria-labelledby="cs-contact-h">
   <div class="wrap narrow">
-    <h2 id="cs-contact-h">Questions about the method are welcome.</h2>
-    <p>I am glad to walk through any part of this, including the parts that did not work. <a href="https://wesshelton.com/#contact">Contact details are on the main page.</a></p>
+    <h2 id="cs-contact-h">I'd welcome questions about any part of this.</h2>
+    <p>Ask about any step and I'll walk you through it, including the parts that didn't work and what I changed. <a href="https://wesshelton.com/#contact">Contact details are on the main page.</a></p>
     <p class="foot">Tools named: Perplexity, Claude Code, a claude.ai project, GitHub and GitHub Actions, Google Calendar. Built with AI assistance: Claude Code wrote the scripts and automation at my direction. Last updated November 2026.</p>
   </div>
 </section>
