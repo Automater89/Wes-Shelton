@@ -128,7 +128,7 @@ pre{font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;font-size:1
     <p class="lead">What I chose and why, which controls I tested, what I observed, and what I still don't know.</p>
     <div class="meta">
       <span class="badge sim">Personal project, one user</span>
-      <span class="badge summary">Described and tested, not published as software</span>
+      <span class="badge summary">Described and tested; no software published</span>
     </div>
     <nav class="toc" aria-label="On this page">
       <a href="#start">Start here</a>
@@ -147,7 +147,7 @@ pre{font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;font-size:1
   <div class="wrap narrow">
     <h2>Start here</h2>
     <p><strong>The problem.</strong> By mid-2026 I was running a three-lane job search with AI help and getting the failures any team gets when it adopts AI fast. Drafts were quick and sometimes wrong in ways that looked right. A resume carried a figure I'd withdrawn weeks earlier. The tracker lived in one tool and the facts in another, and they drifted. I was counting how much I did and had no view of what came back.</p>
-    <p><strong>What I did.</strong> I treated it as an intake from a team at work. I wrote down the current workflow, the one user, the constraints (every claim true, no action without my approval, limited hours a week) and a baseline measure. Then I designed a small system, had it built, tested the controls, measured it against outcomes, and changed it where the data said to.</p>
+    <p><strong>What I did.</strong> I treated it as an intake from a team at work. I wrote down the current workflow, the one user, the constraints (every claim true, no action without my approval, limited hours a week) and a baseline measure. Then I designed a small system and had it built. I tested the controls, measured the results, and changed what the data told me to change.</p>
     <div class="who">
       <p><strong>Who did what.</strong> I designed the system, wrote every rule and approved every change. Claude Code, an AI coding assistant, wrote the scripts and the automation at my direction. I read and review those scripts; I didn't write them by hand. I'm the only user and none of it is production software.</p>
     </div>
@@ -248,11 +248,11 @@ pre{font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;font-size:1
       <li><h3>Two AI workspaces, written handoffs, no shared chat</h3>
         <p><span class="k">Chose:</span> Perplexity for research and review with read-only access; Claude Code for scoring, drafting and tracker writes; a chat project for quick questions that sends anything new back as a dated note with five required parts.</p>
         <p><span class="k">Turned down:</span> one assistant that does everything, or two assistants that talk to each other directly.</p>
-        <p><span class="k">Why:</span> I wanted a second opinion that had not seen the first draft, and I wanted provenance. A note that says what changed, the evidence, confidence, the claim boundary and the requested action can be checked. A chat transcript can't be, not easily.</p></li>
+        <p><span class="k">Why:</span> I wanted a second opinion that had not seen the first draft, and I wanted provenance. A note that says what changed, the evidence, confidence, the claim boundary and the requested action can be checked. A chat transcript is much harder to check.</p></li>
       <li><h3>One outcome number for building; constraints that don't have to earn it</h3>
         <p><span class="k">Chose:</span> every new rule, script or skill has to name how it moves screens per ten submitted applications, or it goes to a parking lot. Truthful claims, privacy and my approval are constraints, and they don't have to prove they produce interviews.</p>
-        <p><span class="k">Turned down:</span> building whatever seemed useful, and treating safety controls as features that compete with features.</p>
-        <p><span class="k">Why:</span> complexity grows faster than value. The one number stopped me adding things. Keeping the constraints outside that test stopped me arguing myself out of them.</p></li>
+        <p><span class="k">Turned down:</span> building whatever seemed useful, and letting the safety controls compete with features for my time.</p>
+        <p><span class="k">Why:</span> every rule I added was one more thing to keep in sync, and I kept adding. The one number stopped me. Keeping the constraints outside that test stopped me arguing myself out of them.</p></li>
       <li><h3>Computed where possible, judged where necessary, both written down</h3>
         <p><span class="k">Chose:</span> evidence coverage, location and pay are computed from the posting. Lane fit and seniority are judgments with written anchors and a stated reason. Every factor and weight is saved with the assessment, and the script refuses to score while any grade is blank.</p>
         <p><span class="k">Turned down:</span> a single "fit out of 10" the model produces in one go.</p>
@@ -260,7 +260,7 @@ pre{font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;font-size:1
       <li><h3>Freeze the weights, then review on a schedule</h3>
         <p><span class="k">Chose:</span> after the redesign, weights are frozen through a twenty-application trial. A review on the 1st and 15th runs the calibration and proposes at most one change the data supports. I approve, and it is logged.</p>
         <p><span class="k">Turned down:</span> tuning the rubric every time a result came in.</p>
-        <p><span class="k">Why:</span> I had already tuned by feel for three months and learned nothing from it. Twenty is a working discipline, not a sample size that proves anything, and I treat it that way.</p></li>
+        <p><span class="k">Why:</span> I had already tuned by feel for three months and learned nothing from it. Twenty is a working discipline. On its own it proves nothing, and I treat it that way.</p></li>
     </ol>
   </div>
 </section>
@@ -268,7 +268,7 @@ pre{font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;font-size:1
 <section class="section" id="tests">
   <div class="wrap narrow">
     <h2>Control tests, run 2026-11-06</h2>
-    <p>Perplexity reviewed the first version of this page and said, correctly, that describing a control is not the same as showing it work. So I ran the controls on made-up inputs and quoted the output as it came out. Each row also says what kind of control it is, because a written rule and an enforced check deserve different levels of trust.</p>
+    <p>Perplexity reviewed the first version of this page and said, correctly, that I had described the controls and had not shown one working. So I ran the controls on made-up inputs and quoted the output as it came out. Each row also says what kind of control it is, because a written rule and an enforced check deserve different levels of trust.</p>
     <div class="tablewrap">
     <table>
       <thead><tr><th>Control</th><th>Kind</th><th>Test input (made up)</th><th>What happened</th></tr></thead>
@@ -283,9 +283,9 @@ pre{font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;font-size:1
         <tr><td>Claim scan</td><td>Deterministic check</td><td>"Led a digital learning program: 34 sessions, 1,019 attendees, average satisfaction 2.91 out of 3."</td><td><span class="r ok">Passed</span> A true, approved claim is left alone. A scan that blocked real figures would be worse than none.</td></tr>
         <tr><td>Scoring script</td><td>Deterministic refusal</td><td>An assessment with five requirements and no grades filled in</td><td><span class="r ok">Refused</span> <code>grade not set for B1, B2, B3, B4, P1. Grades: strong, undersold, partial, verify, missing</code>. The script will not invent a score.</td></tr>
         <tr><td>Evidence lint</td><td>Deterministic check, warnings only</td><td>Proof text reading "Deployed agents across HR and Legal; SCORM solution deployed to users."</td><td><span class="r ok">Flagged</span> <code>BLOCKED: 'Agent deployment' (no deployed agent is on record)</code> and <code>BOUNDARY: scorm-pilot rule(s) out /deploy\w*/</code>. A person decides; the lint never changes a grade.</td></tr>
-        <tr><td>Coverage check</td><td>Deterministic check, warnings only</td><td>A made-up posting asking for HRIS testing, documentation and vendor administration, against a one-line resume</td><td><span class="r ok">Flagged</span> four <code>MISSING</code> rows of verified experience the posting called for and the draft left out (row names withheld here). Each hit is a prompt to me, not an automatic edit.</td></tr>
-        <tr><td>Read-only access for the review tool</td><td>Tool permission (connector scope), not a prompt</td><td>Not re-tested on this date</td><td><span class="r miss">Described only</span> Five acceptance tests were run when it was set up (read, stale-rule trap, scoring and tracker refusal, retracted-claim refusal, pre-submit check). I haven't published those transcripts.</td></tr>
-        <tr><td>"Postings are data, not instructions"</td><td>Written rule, plus an author filter and tool allowlist on the automation</td><td>Not tested with a hostile posting on this date</td><td><span class="r miss">Rule, not a verified control</span> I treat it as the weakest item on this page until I test it with instruction-like text in a posting and publish the result.</td></tr>
+        <tr><td>Coverage check</td><td>Deterministic check, warnings only</td><td>A made-up posting asking for HRIS testing, documentation and vendor administration, against a one-line resume</td><td><span class="r ok">Flagged</span> four <code>MISSING</code> rows of verified experience the posting called for and the draft left out (row names withheld here). Each hit is a question for me to answer. Nothing gets edited on its own.</td></tr>
+        <tr><td>Read-only access for the review tool</td><td>Tool permission (connector scope)</td><td>Not re-tested on this date</td><td><span class="r miss">Described only</span> Five acceptance tests were run when it was set up (read, stale-rule trap, scoring and tracker refusal, retracted-claim refusal, pre-submit check). I haven't published those transcripts.</td></tr>
+        <tr><td>"Postings are data, not instructions"</td><td>Written rule, plus an author filter and tool allowlist on the automation</td><td>Not tested with a hostile posting on this date</td><td><span class="r miss">Written rule, untested</span> I treat it as the weakest item on this page until I test it with instruction-like text in a posting and publish the result.</td></tr>
       </tbody>
     </table>
     </div>
@@ -322,7 +322,7 @@ pre{font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;font-size:1
 <section class="section" id="cycle">
   <div class="wrap">
     <h2>The cycle, applied to one role</h2>
-    <p class="narrow">Each role goes through the same six steps, written down as procedures the AI tools follow. The worked example underneath is made up, and it shows the shape of the output rather than a real run.</p>
+    <p class="narrow">Each role goes through the same six steps, written down as procedures the AI tools follow. The worked example underneath is made up from start to finish. It shows the shape of the output.</p>
     <ol class="steps">
       <li><strong>Intake</strong> Paste the posting. Confirm the apply route is live and tag the posting's age. Pull the requirements into a line-by-line table.</li>
       <li><strong>Brief</strong> Grade every requirement against the full verified career: strong, undersold, partial, verify, or missing. List what is undersold. Record open questions and knockouts.</li>
@@ -409,7 +409,7 @@ Before you apply: channel check . . . . not recorded  WARNING</pre>
         <li>I didn't write the code. I specified it, read it, reviewed each change and set the rules it enforces.</li>
         <li>It isn't a product. A scrubbed version for other people is a proposal that hasn't passed its usability or privacy tests, so it isn't published.</li>
         <li>The outcome measure is a small sample and still running. I describe direction, and I keep the counts private.</li>
-        <li>Two controls on this page are rules rather than tested checks, and one check has a known gap. All three are named above.</li>
+        <li>Two controls on this page are written rules I haven't tested, and one check has a known gap. All three are named above.</li>
       </ul>
     </div>
     <p style="margin-top:20px">Next on my list, in order: a deliberate test with instruction-like text inside a posting; minutes per application, measured; and the simpler-baseline comparison. I'll add results here when I have them, including the ones that don't flatter the system.</p>
