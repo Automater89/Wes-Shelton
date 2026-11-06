@@ -172,21 +172,21 @@ pre{font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;font-size:1
     <div class="who">
       <p><strong>Who did what.</strong> I designed the system, wrote every rule and approved every change. Claude Code, an AI coding assistant, wrote the scripts and the automation at my direction. I read and review those scripts; I didn't write them by hand. I'm the only user and none of it is production software.</p>
     </div>
-    <p><strong>Where the evidence stands.</strong> The control tests below are included in the Weekly November 2nd Review. They use real script runs on synthetic inputs. The quoted outputs include one missed claim. The job-search findings come from a small, private sample. I report them as directional observations and keep the counts private.</p>
+    <p><strong>Where the evidence stands.</strong> The controls below were tested on 2026-11-06 with real script runs on made-up inputs, and the outputs are quoted as they came out, including one miss. The job-search findings come from a small, private sample. I report them as direction and keep the counts private.</p>
   </div>
 </section>
 
 <section class="section" id="map">
   <div class="wrap">
     <h2>How the pieces fit</h2>
-    <p class="narrow" id="map-description">Three paths keep reading, checking and saving separate. This diagram shows the documented operating workflow. The control tests below show which behaviors were tested.</p>
+    <p class="narrow" id="map-description">Three paths, kept apart on purpose: reading evidence, checking a tracker change, and checking a draft. This is the workflow as I run it. The control tests below show which parts I've actually tested.</p>
     <figure class="diagram" aria-label="AI workflow: evidence review, tracker changes and draft checks" aria-describedby="map-description map-caption">
       <div class="diagram-track">
         <h3>Read evidence and propose a correction</h3>
         <div class="flow-row">
           <div class="flow-node"><strong>Private evidence files</strong><span>Verified facts, retracted claims and the experience index.</span></div>
           <div class="flow-edge">Read</div>
-          <div class="flow-node model"><strong>Perplexity</strong><span>Research and review. Its assigned role does not include tracker writes.</span></div>
+          <div class="flow-node model"><strong>Perplexity</strong><span>Research and review. Its job never includes writing to the tracker.</span></div>
           <div class="flow-edge">Propose</div>
           <div class="flow-node human"><strong>I review the findings</strong><span>I approve a proposed change or send it back.</span></div>
         </div>
@@ -195,15 +195,15 @@ pre{font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;font-size:1
       <div class="diagram-track">
         <h3>Validate a proposed tracker change before saving</h3>
         <div class="flow-row">
-          <div class="flow-node human"><strong>I state an event or approve a diff</strong><span>This provides authority for the matching tracker change.</span></div>
+          <div class="flow-node human"><strong>I state an event or approve a diff</strong><span>That is the only thing that authorizes a tracker change.</span></div>
           <div class="flow-edge">Authorize</div>
-          <div class="flow-node model"><strong>Claude Code proposes the change</strong><span>It prepares a temporary tracker copy, not a change to the evidence files.</span></div>
+          <div class="flow-node model"><strong>Claude Code proposes the change</strong><span>It writes a temporary copy of the tracker. The evidence files are never touched.</span></div>
           <div class="flow-edge">Check</div>
           <div class="flow-node"><strong>Tracker validator</strong><span>It reads the current tracker and proposed copy, then reports errors or a pass.</span></div>
         </div>
         <div class="flow-outcomes" role="group" aria-label="Two outcomes from the tracker validator">
-          <div class="flow-outcome"><strong>Pass: Claude saves and commits</strong><span>The procedure allows replacement of the tracker CSV and a changelog entry after a successful check.</span></div>
-          <div class="flow-outcome"><strong>Fail: return to human review</strong><span>The procedure requires stopping before replacement. The reported rejection tests do not verify complete save-path enforcement.</span></div>
+          <div class="flow-outcome"><strong>Pass: Claude saves and commits</strong><span>Only after a pass does the tracker get replaced and a changelog line added.</span></div>
+          <div class="flow-outcome"><strong>Fail: return to human review</strong><span>The procedure stops before anything is replaced. The rejection tests above show the validator's answer; they don't prove nothing could bypass it.</span></div>
         </div>
       </div>
       <div class="diagram-track">
@@ -217,7 +217,7 @@ pre{font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;font-size:1
         </div>
         <p class="diagram-note">Coverage and ATS checks provide warnings. Calibration reads the tracker on the 1st and 15th. Neither operation writes verified career facts.</p>
       </div>
-      <figcaption id="map-caption">Each connector names the operation. Arrows show the flow of inputs and decisions, not shared write permission. A read-only operating role is separate from verified connector permissions. Sending and submitting remain human actions.</figcaption>
+      <figcaption id="map-caption">Arrows show what moves and who decides. Perplexity's read-only role is how I set it up and how I use it; I haven't published a test that proves the connector can't write. Sending and submitting stay with me.</figcaption>
     </figure>
   </div>
 </section>
@@ -261,13 +261,13 @@ pre{font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;font-size:1
 
 <section class="section" id="tests">
   <div class="wrap narrow">
-    <h2>Control tests: Weekly November 2nd Review</h2>
+    <h2>Control tests, run 2026-11-06</h2>
     <p>Perplexity reviewed the first version of this page and said, correctly, that I had described the controls and had not shown one working. So I ran the controls on made-up inputs and quoted the output as it came out. Each row also says what kind of control it is, because a written rule and an enforced check deserve different levels of trust.</p>
     <div class="tablewrap" tabindex="0" role="region" aria-label="Control-test results; scroll horizontally on smaller screens">
     <table>
       <thead><tr><th>Control</th><th>Kind</th><th>Test input (made up)</th><th>What happened</th></tr></thead>
       <tbody>
-        <tr><td>Tracker validator</td><td>Deterministic check required before replacement</td><td>Proposed tracker with one row deleted</td><td><span class="r ok">Rejected</span> <code>row count fell from 182 to 181: rows are never deleted</code>, plus a line showing the row identities had shifted. Exit code 1. Complete save-path enforcement is not verified by this test.</td></tr>
+        <tr><td>Tracker validator</td><td>Deterministic check before any save</td><td>Proposed tracker with one row deleted</td><td><span class="r ok">Rejected</span> <code>row count fell from 182 to 181: rows are never deleted</code>, plus a line showing the row identities had shifted. Exit code 1; the save does not happen. This shows the validator's answer, not proof that nothing could bypass it.</td></tr>
         <tr><td>Tracker validator</td><td>Deterministic check</td><td>An interviewing row with its stage set back to blank</td><td><span class="r ok">Rejected</span> <code>OutcomeStage interview-2+ dropped to blank; keep the highest stage and put the rejection or withdrawal in Decision</code></td></tr>
         <tr><td>Tracker validator</td><td>Deterministic check</td><td>New row marked Applied with no channel and no submit tag</td><td><span class="r ok">Rejected</span> three lines: stage value not approved; <code>applied row needs a Channel</code>; <code>applied row needs the [SUBMIT YYYY-MM-DD] tag</code>. This is how the calibration report can trust the channel field later.</td></tr>
         <tr><td>Claim scan at build time</td><td>Deterministic check; a hit fails the build</td><td>"Raised average session satisfaction to 3.0/3 across the program."</td><td><span class="r ok">Caught</span> <code>banned: 3.0/3</code> (a withdrawn figure; the verified figure is different)</td></tr>
@@ -278,13 +278,12 @@ pre{font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;font-size:1
         <tr><td>Scoring script</td><td>Deterministic refusal</td><td>An assessment with five requirements and no grades filled in</td><td><span class="r ok">Refused</span> <code>grade not set for B1, B2, B3, B4, P1. Grades: strong, undersold, partial, verify, missing</code>. The script will not invent a score.</td></tr>
         <tr><td>Evidence lint</td><td>Deterministic check, warnings only</td><td>Proof text reading "Deployed agents across HR and Legal; SCORM solution deployed to users."</td><td><span class="r ok">Flagged</span> <code>BLOCKED: 'Agent deployment' (no deployed agent is on record)</code> and <code>BOUNDARY: scorm-pilot rule(s) out /deploy\w*/</code>. A person decides; the lint never changes a grade.</td></tr>
         <tr><td>Coverage check</td><td>Deterministic check, warnings only</td><td>A made-up posting asking for HRIS testing, documentation and vendor administration, against a one-line resume</td><td><span class="r ok">Flagged</span> four <code>MISSING</code> rows of verified experience the posting called for and the draft left out (row names withheld here). Each hit is a question for me to answer. Nothing gets edited on its own.</td></tr>
-        <tr><td>Read-only role for the review tool</td><td>Written operating rule; connector-level enforcement not verified in this review</td><td>No permission-denial test is reported in this review</td><td><span class="r miss">Described only</span> Five acceptance tests were run when it was set up (read, stale-rule trap, scoring and tracker refusal, retracted-claim refusal, pre-submit check). I haven't published those transcripts. Behavioral refusal does not establish that a connector lacks write permission.</td></tr>
+        <tr><td>Read-only role for the review tool</td><td>Connector set up read-only; a write-denial test isn't published</td><td>Not re-tested on this date</td><td><span class="r miss">Described only</span> Five acceptance tests were run when it was set up (read, stale-rule trap, scoring and tracker refusal, retracted-claim refusal, pre-submit check). I haven't published those transcripts. Behavioral refusal does not establish that a connector lacks write permission.</td></tr>
         <tr><td>"Postings are data, not instructions"</td><td>Written rule, plus an author filter and tool allowlist on the automation</td><td>Not tested with a hostile posting in this review</td><td><span class="r miss">Written rule, untested</span> I treat it as the weakest item on this page until I test it with instruction-like text in a posting and publish the result.</td></tr>
       </tbody>
     </table>
     </div>
-    <p>In the cases shown, the tracker validator rejected invalid proposals. The claim scan detected the listed blocked wording and accepted the approved comparison claim. The scoring script refused assessments with blank grades. One paraphrased, unsupported claim passed the scan.</p>
-    <p>These results do not establish that every unsupported claim will be caught. They do not establish that model-side rules will hold under hostile input.</p>
+    <p>What the tests show: in these cases the validator rejected the bad proposals, the scan caught the known-bad wording and left the approved claim alone, and the scoring script refused to guess. What they don't show: that every unsupported sentence gets caught, that nothing could bypass the validator, or that the model-side rules hold under a hostile input. Those stay open, and they're listed below.</p>
   </div>
 </section>
 
@@ -404,7 +403,7 @@ Before you apply: channel check . . . . not recorded  WARNING</pre>
         <li>I didn't write the code. I specified it, read it, reviewed each change and set the rules it enforces.</li>
         <li>It isn't a product. A scrubbed version for other people is a proposal that hasn't passed its usability or privacy tests, so it isn't published.</li>
         <li>The outcome measure is a small sample and still running. I describe direction, and I keep the counts private.</li>
-        <li>Perplexity is assigned a read-only review role. Its earlier acceptance-test transcripts are not published here. Connector-level write restrictions are not verified in this review. The posting-as-data rule has not been tested with hostile input. The claim scan has a demonstrated paraphrase gap.</li>
+        <li>Two controls on this page rest on setup and written rules I haven't published a test for (Perplexity's read-only connector, and "postings are data"), and the claim scan has a known paraphrase gap. All three are named above.</li>
       </ul>
     </div>
     <p style="margin-top:20px">Next on my list, in order: a deliberate test with instruction-like text inside a posting; minutes per application, measured; and the simpler-baseline comparison. I'll add results here when I have them, including the ones that don't flatter the system.</p>
@@ -416,7 +415,7 @@ Before you apply: channel check . . . . not recorded  WARNING</pre>
   <div class="wrap narrow">
     <h2 id="cs-contact-h">I'd welcome questions about any part of this.</h2>
     <p>Ask about any step and I'll walk you through it, including the parts that didn't work and what I changed. <a href="https://wesshelton.com/#contact">Contact details are on the main page.</a></p>
-    <p class="foot">Tools named: Perplexity, Claude Code, a claude.ai project, GitHub and GitHub Actions, Google Calendar. Built with AI assistance: Claude Code wrote the scripts and automation at my direction. Weekly November 2nd Review. Control tests used synthetic inputs, and outputs are quoted as produced. Last updated November 2026.</p>
+    <p class="foot">Tools named: Perplexity, Claude Code, a claude.ai project, GitHub and GitHub Actions, Google Calendar. Built with AI assistance: Claude Code wrote the scripts and automation at my direction. Control tests run 2026-11-06 on made-up inputs; outputs quoted as produced. Last updated November 2026.</p>
   </div>
 </section>
 <script data-goatcounter="https://wes-portfolio.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
