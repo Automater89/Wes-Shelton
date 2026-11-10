@@ -35,6 +35,6 @@ Then open http://localhost:8000.
 
 ## Contact
 
-- LinkedIn: https://www.linkedin.com/in/wallace-shelton-559b0364
+- LinkedIn: https://www.linkedin.com/in/wesshelton/
 - Email: wshelton89@gmail.com
 - Plymouth, MI
