@@ -106,6 +106,8 @@ section{scroll-margin-top:16px}
 .detail-main p{font-size:18px;line-height:1.65;color:var(--ink-2);margin-bottom:18px}
 .aside{display:grid;gap:24px}
 .aside ul.list{margin:0;padding-left:20px;display:grid;gap:6px;color:var(--ink-2)}
+#detail-paras p.label{margin-top:28px}
+#detail-paras p.label:first-child{margin-top:0}
 .scope{background:var(--teal-soft);border-radius:10px;padding:20px}
 .scope h4{margin:0 0 8px;font-size:14px;color:var(--teal-dark)}
 .scope p{font-size:15px;color:var(--ink-2)}
@@ -256,7 +258,7 @@ section{scroll-margin-top:16px}
       <h3 id="detail-title" tabindex="-1"></h3>
       <div class="detail-grid">
         <div class="detail-main">
-          <p class="label">MY CONTRIBUTION</p>
+          <p class="label" id="contrib-label">MY CONTRIBUTION</p>
           <div id="detail-paras"></div>
           <figure class="measures" id="measures" hidden>
             <figcaption>Learning-series measures, 2025</figcaption>
@@ -427,6 +429,12 @@ section{scroll-margin-top:16px}
       paras: ['I ran this as a phased project. I gathered requirements from HR and IT, wrote the project charter and RACI, mapped the risks, and set milestones and a user acceptance testing plan.', 'Then I built the Power Automate flow and deployed it. It went live and was used by another team member.'],
       delivered: ['HR and IT requirements', 'Project charter and RACI', 'Risk map and milestones', 'User acceptance testing plan', 'Deployed Power Automate flow'],
       tools: ['Power Automate'],
+      story: [
+        ['The problem', 'Offboarding had steps owned by both HR and IT. The two teams needed one agreed process before anything was automated.'],
+        ['Constraints', 'Each team owned different steps, so responsibilities had to be settled first. The work followed set steps, so a standard workflow fit and no AI was used.'],
+        ['Approach', 'I ran it as a phased project. I gathered requirements from HR and IT, wrote the project charter and RACI, mapped the risks, and set milestones and a user acceptance testing plan. The build came after the plan.'],
+        ['Outcome', 'I built the Power Automate flow and deployed it. It went live and was used by another team member.']
+      ],
       scope: 'Built and deployed during that project. Flow details stay private.'
     },
     library: {
@@ -436,7 +444,28 @@ section{scroll-margin-top:16px}
       paras: ['Process knowledge was spread across teams and documents. I pulled the existing procedures together, drafted the process records and step sequences, and worked with each team on the swimlane diagrams and Visio maps.', 'The library covered 29 processes, at least 22 swimlane diagrams, and 16 unique Visio maps. Those counts describe what the library documents. The teams own the processes, and the library was a shared effort.'],
       delivered: ['Shared process library', 'Process documentation', 'Swimlane diagrams', 'Visio process maps'],
       tools: ['Visio'],
+      story: [
+        ['The problem', 'Process knowledge was spread across three IT teams and their documents, with no shared place to see how the work was done.'],
+        ['Constraints', 'Each team owns its own processes, so the library had to be built with them, not for them. The counts describe documentation, not automation.'],
+        ['Approach', 'I pulled the existing procedures together and drafted the process records and step sequences. Then I worked with the Applications, Client Services, and Infrastructure teams on swimlane diagrams with decision points and step-by-step procedures, plus Visio maps.'],
+        ['Outcome', 'One shared library covering 29 processes, at least 22 swimlane diagrams, and 16 unique Visio maps.']
+      ],
       scope: 'Figures describe documentation coverage in a collaborative library. Original maps stay private.'
+    },
+    legal: {
+      title: 'Legal Intake Routing', kind: 'work', kindLabel: 'Workplace project', status: 'Built with Data & Analytics',
+      scan: [['Auditable','What Legal needed'],['No agent','Standard workflow chosen'],['Redesign','Dashboard rebuilt with Legal']],
+      card: 'Requests to the Legal mailbox had to be routed. I compared a Copilot Studio agent with a standard Power Automate and SharePoint design, recommended the standard design because Legal needed routing they could audit, and built it with the Data & Analytics team.',
+      paras: [],
+      story: [
+        ['The problem', 'Requests came into a shared Legal mailbox and had to be routed.'],
+        ['Constraints', 'Legal needed auditable behavior: routing they could check and trust, not answers that could vary.'],
+        ['Approach', 'I evaluated a Copilot Studio agent against a Power Automate and SharePoint List design and recommended the deterministic design. I built it with the Data & Analytics team.'],
+        ['Outcome', 'In the first review, Legal said the dashboard lacked key fields they use to decide where to route emails, so I redesigned it with them.']
+      ],
+      delivered: ['Option comparison and recommendation', 'Power Automate routing', 'SharePoint List', 'Dashboard, redesigned with Legal'],
+      tools: ['Power Automate', 'SharePoint', 'Copilot Studio (evaluated)'],
+      scope: 'No volume or cycle-time figures. Routing details stay private.'
     },
     audits: {
       scan: [['Weekly','Payroll result checks'],['Post-OE','VLOOKUP enrollment audits'],['Finance','Pivot-table summaries']],
@@ -467,7 +496,7 @@ section{scroll-margin-top:16px}
     }
   };
   var LANES = {
-    ai: { label: 'AI Enablement', intro: 'My AI work was hands-on: building and piloting tools, writing the training and guidance, and helping people use them day to day. Not every problem needed AI. The offboarding flow here is a standard Power Automate workflow.', order: ['learning', 'scorm', 'offboarding'] },
+    ai: { label: 'AI Enablement', intro: 'My AI work was hands-on: building and piloting tools, writing the training and guidance, and helping people use them day to day. Not every problem needed AI. For Legal intake routing, I compared an agent with a standard workflow and recommended the workflow.', order: ['learning', 'scorm', 'legal'] },
     hr: { label: 'HR & Benefits Technology', intro: 'Benefits work showed me where systems break down for employees, like rejected eligibility files and data that does not match between vendors. I use that when I gather requirements, test a workflow, or write the guidance people will read.', order: ['offboarding', 'audits', 'library'] },
     process: { label: 'Process Improvement', intro: 'I look at how the work moves before I pick a tool. I helped IT teams document 29 processes in a shared library, planned HR offboarding with a charter and test plan before building it, and wrote request standards and response measures for a benefits team. I am also a Lean Six Sigma Black Belt.', order: ['library', 'offboarding', 'tracker'] },
     ops: { label: 'Benefits Operations', intro: 'Day to day, my benefits work was enrollment and life-event changes, COBRA and dependent eligibility, eligibility file rejects, Excel audits, vendor coordination, and open-enrollment and new-hire presentations.', order: ['audits', 'tracker', 'offboarding'] },
@@ -524,13 +553,22 @@ section{scroll-margin-top:16px}
     });
   }
 
-  function openCase(id){
+  function openCase(id, fromLink){
     var c = CASES[id];
     $('back-text').textContent = 'Back to ' + LANES[lane].label + ' work';
     var m = $('detail-meta'); m.innerHTML = ''; m.appendChild(meta(c));
     $('detail-title').textContent = c.title;
     var p = $('detail-paras'); p.innerHTML = '';
-    c.paras.forEach(function(t){ p.appendChild(el('p', null, t)); });
+    // Cases with a story show problem, constraints, approach, outcome; others show paragraphs
+    $('contrib-label').hidden = !!c.story;
+    if (c.story) {
+      c.story.forEach(function(sec){
+        p.appendChild(el('p', 'label', sec[0].toUpperCase()));
+        p.appendChild(el('p', null, sec[1]));
+      });
+    } else {
+      c.paras.forEach(function(t){ p.appendChild(el('p', null, t)); });
+    }
     $('measures').hidden = !c.measures;
     var d = $('delivered'); d.innerHTML = '';
     c.delivered.forEach(function(t){ d.appendChild(el('li', null, t)); });
@@ -543,10 +581,12 @@ section{scroll-margin-top:16px}
     $('cards').hidden = true;
     $('detail').hidden = false;
     $('detail').scrollIntoView({ block: 'start' });
-    $('detail-title').focus({ preventScroll: true });
+    if (!fromLink) $('detail-title').focus({ preventScroll: true });
+    history.replaceState(null, '', '#case-' + id);
   }
 
   function closeCase(){
+    history.replaceState(null, '', '#work');
     $('detail').hidden = true;
     $('cards').hidden = false;
     var btn = lastTrigger && document.querySelector('.card-btn[aria-label="Read case study: ' + CASES[lastTrigger].title + '"]');
@@ -569,6 +609,12 @@ section{scroll-margin-top:16px}
   });
   document.addEventListener('keydown', function(e){ if (e.key === 'Escape' && !$('detail').hidden) closeCase(); });
   renderLane();
+  // Open a case straight from a link like #case-offboarding, in a lane that shows it
+  var m = location.hash.match(/^#case-(\w+)$/);
+  if (m && CASES[m[1]]) {
+    for (var k in LANES) { if (LANES[k].order.indexOf(m[1]) > -1) { lane = k; break; } }
+    renderLane(); lastTrigger = m[1]; openCase(m[1], true);
+  }
 })();
 </script>
 <!-- GoatCounter: private visitor counts, no cookies. Dashboard: wes-portfolio.goatcounter.com -->
