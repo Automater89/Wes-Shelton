@@ -38,6 +38,8 @@ p{margin:0}
 
 /* header */
 .site-header{border-bottom:1px solid var(--line);background:var(--bg)}
+@media (min-width:901px){.site-header{position:sticky;top:0;z-index:20}html{scroll-padding-top:96px}}
+.nav a.nav-resume{color:var(--teal);font-weight:600}
 .site-header .wrap{display:flex;align-items:center;justify-content:space-between;gap:16px;flex-wrap:wrap;min-height:80px;padding-top:8px;padding-bottom:8px}
 .brand{font-family:var(--serif);font-size:24px;font-weight:600;color:var(--ink);text-decoration:none}
 .nav{display:flex;flex-wrap:wrap;column-gap:32px;font-weight:500}
@@ -84,6 +86,12 @@ section{scroll-margin-top:16px}
 .badge.summary{background:#ECE8DF;color:#3A3F4A;border-color:var(--line-2)}
 .badge.sim{background:#FFF4DE;color:#6B4700;border:1px dashed #C9B48A}
 .status{font-size:14px;color:var(--muted-2)}
+/* at-a-glance strip on each card: verified numbers, or plain status facts */
+.scan{list-style:none;margin:0;padding:14px 0;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px;border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
+.scan li{display:flex;flex-direction:column;gap:2px}
+.scan strong{font-family:var(--serif);font-size:20px;line-height:1.2;color:var(--teal-dark)}
+.scan strong.num{font-size:30px}
+.scan span{font-size:13px;line-height:1.35;color:var(--muted-2)}
 .chips{list-style:none;margin:0;padding:0;display:flex;flex-wrap:wrap;gap:8px}
 .chips li{padding:4px 10px;border-radius:6px;background:var(--chip);font-size:13px;font-weight:500;color:var(--muted)}
 .card-btn{align-self:flex-start;min-height:46px;padding:0 20px;border-radius:8px;border:1.5px solid var(--ink);background:var(--surface);color:var(--ink);font:600 15px var(--sans);cursor:pointer}
@@ -191,6 +199,7 @@ section{scroll-margin-top:16px}
       <a href="#experience">Experience</a>
       <a href="#how">How I Work</a>
       <a href="#contact">Contact</a>
+      <a class="nav-resume" href="Wes_Shelton_Resume.pdf" download="Wes_Shelton_Resume.pdf">Resume (PDF)</a>
     </nav>
   </div>
 </header>
@@ -394,6 +403,7 @@ section{scroll-margin-top:16px}
 (function(){
   var CASES = {
     learning: {
+      scan: [['34','Sessions in 2025'],['1,019','Attendees'],['2.91/3','Avg. satisfaction']],
       title: 'Enterprise Learning and AI Enablement', kind: 'work', kindLabel: 'Workplace program', status: '',
       card: 'I led change management for an internal learning series on workplace technology. Microsoft Copilot was one topic among many. I wrote or contributed to training outlines, exercises, and communications, hosted and ran sessions, and supported users.',
       paras: ['The series covered 29 topics across workplace tools, including Copilot. I led the change-management work. I created or contributed to training outlines, exercises, newsletter drafts, launch content, registration messages, and reminders, and I coordinated reviews and regional program support. I scheduled, hosted, and ran training sessions in Webex and supported users.', 'In 2025 the series recorded 34 sessions, 1,412 registrations, and 1,019 attendees, with average satisfaction of 2.91 out of 3. Those numbers show participation and satisfaction across the series.'],
@@ -402,6 +412,7 @@ section{scroll-margin-top:16px}
       scope: 'Figures are for the whole series, which covered many workplace topics.'
     },
     scorm: {
+      scan: [['Pilot','Built and tested with users'],['Leadership','Pilot results presented'],['Guides','User and test materials']],
       title: 'SCORM and E-Learning Content Conversion', kind: 'work', kindLabel: 'Workplace project', status: 'Built and piloted with users',
       card: 'SCORM is the package format learning management systems use for e-learning courses. I built and piloted a Copilot Studio tool to help convert training content during an LMS migration, and wrote the guidance and test materials that went with it.',
       paras: ['Converting training content by hand was recurring weekly work. I built a Copilot Studio tool for the conversion, plus a supporting workflow for transforming the source documents. I tested it, demonstrated it to stakeholders, piloted it with users, and presented the pilot results to leadership.', 'Along with the tool, I delivered project documentation, user guidance, testing materials, process guidance, and conversion standards. This example covers the pilot, testing, and documentation I delivered.'],
@@ -410,6 +421,7 @@ section{scroll-margin-top:16px}
       scope: 'A pilot with users and the materials I delivered.'
     },
     offboarding: {
+      scan: [['Live','Deployed, used by a teammate'],['HR + IT','Requirements from both'],['UAT','Test plan before build']],
       title: 'HR Offboarding Automation', kind: 'work', kindLabel: 'Workplace project', status: 'Built and deployed',
       card: 'Offboarding had steps owned by both HR and IT. I gathered requirements from both teams, planned responsibilities and testing, and built and deployed a Power Automate flow for it. This is a standard workflow, with no AI involved.',
       paras: ['I ran this as a phased project. I gathered requirements from HR and IT, wrote the project charter and RACI, mapped the risks, and set milestones and a user acceptance testing plan.', 'Then I built the Power Automate flow and deployed it. It went live and was used by another team member.'],
@@ -418,6 +430,7 @@ section{scroll-margin-top:16px}
       scope: 'Built and deployed during that project. Flow details stay private.'
     },
     library: {
+      scan: [['29','Processes documented'],['22+','Swimlane diagrams'],['16','Unique Visio maps']],
       title: 'IT Process Library', kind: 'work', kindLabel: 'Collaborative workplace project', status: 'Library built collaboratively',
       card: 'I worked with the Applications, Client Services, and Infrastructure teams to build a shared IT process library: 29 processes, at least 22 swimlane diagrams, and 16 unique Visio maps, all in one place.',
       paras: ['Process knowledge was spread across teams and documents. I pulled the existing procedures together, drafted the process records and step sequences, and worked with each team on the swimlane diagrams and Visio maps.', 'The library covered 29 processes, at least 22 swimlane diagrams, and 16 unique Visio maps. Those counts describe what the library documents. The teams own the processes, and the library was a shared effort.'],
@@ -426,6 +439,7 @@ section{scroll-margin-top:16px}
       scope: 'Figures describe documentation coverage in a collaborative library. Original maps stay private.'
     },
     audits: {
+      scan: [['Weekly','Payroll result checks'],['Post-OE','VLOOKUP enrollment audits'],['Finance','Pivot-table summaries']],
       title: 'Benefits Data Audits and Reporting', kind: 'summary', kindLabel: 'Experience summary', status: '',
       card: 'I used Excel for benefits-side audits and reporting, including VLOOKUP checks after open enrollment and pivot-table summaries for Finance. I also audited weekly payroll results, including retirement-plan contributions.',
       paras: ['In three benefits jobs I used Excel every day. I checked payroll results as payroll was finalized each week, ran post-open-enrollment audits with VLOOKUP, and summarized benefit payment details for Finance. This is benefits-side audit experience, not payroll processing or payroll-system configuration.'],
@@ -434,6 +448,7 @@ section{scroll-margin-top:16px}
       scope: 'A summary of recurring benefits-side audit work.'
     },
     tracker: {
+      scan: [['Team','Cross-functional build'],['Routing','Requests and notifications'],['One door','For benefits requests']],
       title: 'Benefits Customer Service Tracker', kind: 'contrib', kindLabel: 'Workplace contribution', status: 'Cross-functional contribution',
       card: 'I was part of a cross-functional team that built a Benefits Customer Service Tracker on SharePoint. Power Automate routed requests and sent notifications, so the team could see incoming requests and who was handling them.',
       paras: ['I contributed to the tracker as one member of the team. Its job was to give benefits requests one front door and show the team its workload.', 'In the same role, I also wrote standards for how employees submit requests and defined measures for how fast a request got its first response, how much work each person had, and how quickly requests were resolved.'],
@@ -442,6 +457,7 @@ section{scroll-margin-top:16px}
       scope: 'A contribution to a team effort.'
     },
     intakeSim: {
+      scan: [['Simulation','Not employer work'],['Scoring','Model for AI ideas'],['Docs','Governance and templates']],
       title: 'AI Opportunity Intake Workbench', kind: 'sim', kindLabel: 'Portfolio simulation', status: '',
       card: 'When a team has more AI ideas than time, it has to decide which ones to pursue first. This simulation shows how I would collect those ideas, score them, and route them for review.',
       paras: ['When a team has more AI ideas than time, it has to decide which ones to pursue first. This simulation shows how I would collect those ideas, score them, route them for review, and report on them.', 'The repository holds the documentation: a scoring model, a field dictionary, governance notes, and a decision brief template. It is a simulation.'],
@@ -487,6 +503,17 @@ section{scroll-margin-top:16px}
       var m = el('div', 'meta'); m.appendChild(meta(c)); li.appendChild(m);
       li.appendChild(el('h3', null, c.title));
       li.appendChild(el('p', 'copy', c.card));
+      // At-a-glance strip: the 3 facts a 15-second scan should catch
+      if (c.scan) {
+        var s = el('ul', 'scan'); s.setAttribute('aria-label', 'At a glance');
+        c.scan.forEach(function(f){
+          var item = el('li');
+          item.appendChild(el('strong', /^[0-9]/.test(f[0]) ? 'num' : null, f[0]));
+          item.appendChild(el('span', null, f[1]));
+          s.appendChild(item);
+        });
+        li.appendChild(s);
+      }
       if (c.tools.length) li.appendChild(chips(c.tools));
       var b = el('button', 'card-btn', 'Read Case Study');
       b.type = 'button';
