@@ -4,7 +4,7 @@ Source for my portfolio site, published with GitHub Pages.
 
 **Live site:** https://wesshelton.com/
 
-The site connects my experience to three kinds of roles: AI enablement, HR and benefits technology, and benefits operations. Visitors pick a view, and the site reorders the same set of case studies for that audience. The facts don't change between views.
+The site connects my experience to three kinds of roles: HR and benefits technology, AI enablement, and process improvement, with extra views for benefits operations and intake and process governance. Visitors pick a view, and the site reorders the same set of case studies for that audience. The facts don't change between views.
 
 ## How the content is labeled
 
