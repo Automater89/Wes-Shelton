@@ -125,14 +125,7 @@ section{scroll-margin-top:16px}
 .port h3{font-size:22px;line-height:1.3}
 .port p{color:var(--muted);flex-grow:1;font-size:15px}
 .port a{font-weight:600;min-height:44px;display:flex;align-items:center}
-.pplx-facts{list-style:none;margin:28px 0 0;padding:0;display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:16px}
-.pplx-facts li{background:var(--surface);border:1px solid var(--line);border-radius:12px;padding:20px}
-.pplx-facts strong{display:block;font-family:var(--serif);font-size:22px;line-height:1.25;color:var(--ink)}
-.pplx-facts span{display:block;margin-top:6px;font-size:14px;color:var(--muted)}
-.pplx-note{margin-top:28px;font-size:14px;color:var(--muted-2);max-width:760px}
-@media (max-width:900px){.pplx-facts{grid-template-columns:repeat(2,minmax(0,1fr))}}
-@media (max-width:600px){.pplx-facts{grid-template-columns:1fr}}
-
+.port li:only-child{grid-column:1/-1}
 /* experience */
 .exp{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:64px;align-items:start}
 .exp p{font-size:18px;line-height:1.65;color:var(--ink-2);margin-top:20px}
@@ -197,7 +190,6 @@ section{scroll-margin-top:16px}
     <a class="brand" href="#top">Wes Shelton</a>
     <nav class="nav" aria-label="Main">
       <a href="#work">Selected Work</a>
-      <a href="#perplexity">Perplexity Projects</a>
       <a href="#experience">Experience</a>
       <a href="#how">How I Work</a>
       <a href="#contact">Contact</a>
@@ -211,8 +203,8 @@ section{scroll-margin-top:16px}
   <div class="wrap">
     <div>
       <p class="eyebrow">HR &amp; BENEFITS TECHNOLOGY | AI ENABLEMENT | PROCESS IMPROVEMENT</p>
-      <h1>Helping teams improve benefits processes and the systems behind them.</h1>
-      <p class="lead">I worked in member support and benefits for more than ten years before moving into IT project delivery in December 2024. I help teams fix the workflows and systems employees depend on. I test the changes, write the guidance, and use automation and AI where they fit the work.</p>
+      <h1>More than ten years in member support, benefits, and HR systems.</h1>
+      <p class="lead">In benefits I configured deduction codes and eligibility rules in ADP Workforce Now and tested Workday benefits changes with written checklists before release. In December 2024 I moved into IT project delivery, where I managed the ServiceNow application portfolio lifecycle for 100+ applications and built Power Automate workflows that went live. I test the changes, write the guidance, and use AI where it fits the work.</p>
       <div class="actions">
         <a class="btn btn-primary" href="#work">Explore Selected Work</a>
         <a class="btn btn-secondary" href="Wes_Shelton_Resume.pdf" download="Wes_Shelton_Resume.pdf">Download Resume (PDF)</a>
@@ -293,8 +285,8 @@ section{scroll-margin-top:16px}
 
 <section class="section" aria-labelledby="port-h">
   <div class="wrap">
-    <h2 id="port-h">Portfolio examples</h2>
-    <p class="intro">Independent samples that show how I work a problem, kept separate from the workplace work above. None is a client or employer record.</p>
+    <h2 id="port-h">Independent project</h2>
+    <p class="intro">How I would run an AI enablement engagement, shown on my own job search. Kept separate from the workplace work above.</p>
     <ul class="port">
       <li>
         <span class="badge sim" style="align-self:flex-start">Independent project, case study</span>
@@ -302,71 +294,30 @@ section{scroll-margin-top:16px}
         <p>Two AI workspaces (Perplexity and Claude Code) working from one private GitHub repository, with written rules about what each may read and change, a register of retracted claims that overrides every draft, a tracker that changes only from events I state, and one outcome measure that every new rule has to move. After three months the data showed my fit score did not predict interviews and the channel did, so I rebuilt the scoring and retired the rules that added work without helping.</p>
         <p class="note">I designed the system and set every rule. An AI coding assistant wrote the scripts at my direction; I read and review them. Personal project, one user, described rather than published.</p>
         <a href="ai-workflow-case-study.html">Read the case study</a>
-      </li>
-      <li>
-        <span class="badge sim" style="align-self:flex-start">Portfolio process-design sample</span>
-        <h3>Offboarding Process Redesign Case Pack</h3>
-        <p>A sample redesign of employee offboarding, the process where HR, IT, Security, Payroll, Benefits and the manager each own a piece and nobody owns the whole. It has as-is and to-be process maps, a SIPOC, a RACI, six user stories with acceptance criteria, a 14-case test plan, a RAID log and a KPI framework with a baselining plan.</p>
-        <p>The part I would own from benefits experience is the benefits and payroll close: coverage end dates, carrier termination files, COBRA, spending accounts, final pay and the notice the employee gets. Most offboarding designs leave it out.</p>
-        <p class="note">Separate from the Power Automate offboarding workflow I built at work. Repository in final review; available on request.</p>
-      </li>
-      <li>
-        <span class="badge sim" style="align-self:flex-start">Documentation samples</span>
-        <h3>Three more, on request</h3>
-        <p>An AI use-case intake and scoring workbench, a governance plan for a narrow HR policy assistant in Copilot Studio, and an AI readiness assessment. All three are documentation only. Ask and I will share the one that fits the conversation.</p>
+        <p class="note">Also: <a href="https://offside-lab.pplx.app" style="display:inline;min-height:0">Offside Lab</a>, an interactive rule simulator I designed and directed with AI assistance. Personal project.</p>
       </li>
     </ul>
   </div>
 </section>
 
-<section id="perplexity" class="band section" aria-labelledby="pplx-h">
-  <div class="wrap">
-    <h2 id="pplx-h">Perplexity and Computer Projects</h2>
-    <p class="intro">I use Perplexity and Perplexity Computer extensively for research and project work. I chose the problems, set the requirements, and reviewed and refined the outputs, with AI assistance. These are personal projects, separate from any employer.</p>
-    <ul class="pplx-facts" aria-label="At a glance">
-      <li><strong>Reusable skills</strong><span>Configured Computer skills with defined inputs, task ownership, output formats, and approval steps</span></li>
-      <li><strong>Multi-step workflows</strong><span>Research, evidence review, and decision-ready handoffs instead of one-off prompts</span></li>
-      <li><strong>Human approval</strong><span>Consequential actions wait for my review; plans and results are kept separate</span></li>
-      <li><strong>A published learning tool</strong><span>An interactive simulator anyone can try in a browser</span></li>
-    </ul>
-    <ul class="port">
-      <li>
-        <span class="badge sim" style="align-self:flex-start">Independent project</span>
-        <h3>Reusable Perplexity Computer Skills</h3>
-        <p>I set up and refined a library of Computer skills for research, evidence management, communication, and personal workflow automation. When I write a skill, I spell out what it needs as input, what it is responsible for, what the output should look like, and where it has to stop and ask me before acting. When one misses, I adjust it.</p>
-      </li>
-      <li>
-        <span class="badge sim" style="align-self:flex-start">Independent project</span>
-        <h3>Evidence Controls and Perplexity-to-Claude Handoffs</h3>
-        <p>I use Perplexity and Claude for different parts of my research and project work. I set rules for which records each tool reads first, what each one is allowed to change, and which claims are restricted. Work passes between them as dated handoff notes. I review a handoff before I rely on it for a decision or approve an action that reaches anyone else.</p>
-      </li>
-      <li>
-        <span class="badge sim" style="align-self:flex-start">Published learning tool</span>
-        <h3>Offside Lab</h3>
-        <p>An interactive simulator I built and iterated with Perplexity Computer. It teaches a complex rule through draggable scenarios, freeze-frame explanations, and plain-language feedback. It shows how I turn a hard concept into something people can try for themselves.</p>
-        <a href="https://offside-lab.pplx.app">Try Offside Lab</a>
-      </li>
-    </ul>
-    <p class="pplx-note">Built with AI assistance: Perplexity Computer generated much of the implementation.</p>
-  </div>
-</section>
-
-<section id="experience" class="section" aria-labelledby="exp-h">
+<section id="experience" class="band section" aria-labelledby="exp-h">
   <div class="wrap exp">
     <div>
       <h2 id="exp-h">Experience</h2>
-      <p>I started in health-plan member support, then spent years in benefits: enrollment and life-event changes, COBRA and dependent eligibility, EDI 834 eligibility files, vendor data, audits, and open-enrollment presentations to groups of 300 or more. The systems were PeopleSoft, Workday, and ADP Workforce Now: I managed benefits data in PeopleSoft, corrected enrollment records and tested benefits releases with written checklists in Workday, and set up annual enrollment and configured deduction codes and eligibility rules in ADP Workforce Now.</p>
-      <p>In December 2024 I moved into IT as an IT Project Manager / AI Enablement Specialist. I handled application intake, built and piloted automation, and supported people learning new tools. The systems work started earlier, in benefits: I managed the project that replaced a paper tuition-reimbursement form with a SharePoint approval workflow, working with a colleague who brought the SharePoint and Power Automate expertise. Those years are why I ask how a change will land for the employee on the other end.</p>
+      <p>I started in health-plan member support, then spent years in benefits: enrollment and life-event changes, COBRA and dependent eligibility, EDI 834 eligibility files, vendor data, audits, and open-enrollment presentations to groups of 300 or more. The systems were PeopleSoft, Workday, and ADP Workforce Now: I managed benefits data in PeopleSoft, corrected enrollment records and tested benefits releases with written checklists in Workday, and set up annual enrollment and configured deduction codes and eligibility rules in ADP Workforce Now. In two earlier roles I also sent eligibility files to carriers and monitored the scheduled transfers.</p>
+      <p>In my most recent benefits role I ran annual open enrollment for the health and welfare plans from start to finish (project plan, communications, ADP Workforce Now configuration and testing, and vendor coordination) and managed benefits projects such as the ADP Mobile benefits rollout. I prepared Form 5500 filings, ACA 1095-C reporting and responses to IRS and DOL audits for final approval by my manager and director, processed 401(k) deferral changes, contributions, loans and hardship withdrawals through a recordkeeper change, and developed a 401(k) and medical-plan RFP analysis covering about 2,000 North American employees.</p>
+      <p>In December 2024 I moved into IT as an IT Project Manager / AI Enablement Specialist. I managed the ServiceNow Application Portfolio Management lifecycle for 100+ applications, from business demand intake through delivery and retirement, and worked in ServiceNow daily across incidents, requests, demand and reports. For each new software request I reviewed single sign-on, API and data-feed connections with IT security and recorded license counts, renewals, costs and vendor quotes. I also built and piloted automation, developed 500+ governed prompts with responsible-AI documentation, and supported people learning new tools. I hold the ServiceNow IT Leadership Professional Certificate.</p>
+      <p>The systems work started earlier, in benefits: I managed the project that replaced a paper tuition-reimbursement form with a SharePoint approval workflow, working with a colleague who brought the SharePoint and Power Automate expertise. Those years are why I ask how a change will land for the employee on the other end.</p>
     </div>
     <ol class="bridge" aria-label="How my experience connects">
       <li><span class="n">01</span><div><strong>Benefits operations</strong><span class="d">Enrollment support, data audits, vendor coordination, employee education</span></div></li>
-      <li><span class="n">02</span><div><strong>Systems and IT project delivery</strong><span class="d">Requirements, Microsoft 365, Power Automate, process documentation</span></div></li>
+      <li><span class="n">02</span><div><strong>Systems and IT project delivery</strong><span class="d">Requirements, ServiceNow, Microsoft 365, Power Automate, process documentation</span></div></li>
       <li><span class="n">03</span><div><strong>Enablement and adoption</strong><span class="d">Training content, user guidance, communications, user support</span></div></li>
     </ol>
   </div>
 </section>
 
-<section id="how" class="band section" aria-labelledby="how-h">
+<section id="how" class="section" aria-labelledby="how-h">
   <div class="wrap">
     <h2 id="how-h">How I Work</h2>
     <ol class="how">
@@ -408,7 +359,7 @@ section{scroll-margin-top:16px}
       scan: [['34','Sessions in 2025'],['1,019','Attendees'],['2.91/3','Avg. satisfaction']],
       title: 'Enterprise Learning and AI Enablement', kind: 'work', kindLabel: 'Workplace program', status: '',
       card: 'I led change management for an internal learning series on workplace technology. Microsoft Copilot was one topic among many. I wrote or contributed to training outlines, exercises, and communications, hosted and ran sessions, and supported users.',
-      paras: ['The series covered 29 topics across workplace tools, including Copilot. I led the change-management work. I created or contributed to training outlines, exercises, newsletter drafts, launch content, registration messages, and reminders, and I coordinated reviews and regional program support. I scheduled, hosted, and ran training sessions in Webex and supported users.', 'In 2025 the series recorded 34 sessions, 1,412 registrations, and 1,019 attendees, with average satisfaction of 2.91 out of 3. Those numbers show participation and satisfaction across the series.'],
+      paras: ['The series covered 29 topics across workplace tools, including Copilot. I led the change-management work. I created or contributed to training outlines, exercises, newsletter drafts, launch content, registration messages, and reminders, and I coordinated reviews and regional program support. I scheduled, hosted, and ran training sessions in Webex and supported users. I also administered LinkedIn Learning for the region and ran two Copilot sessions for colleagues in Germany that reached 200+ team members.', 'In 2025 the series recorded 34 sessions, 1,412 registrations, and 1,019 attendees, with average satisfaction of 2.91 out of 3. Those numbers show participation and satisfaction across the series.'],
       delivered: ['Training outlines', 'Exercises', 'Communications', 'Regional program support', 'User support'],
       tools: ['Microsoft Copilot', 'Webex'], measures: true,
       scope: 'Figures are for the whole series, which covered many workplace topics.'
@@ -423,7 +374,7 @@ section{scroll-margin-top:16px}
       scope: 'A pilot with users and the materials I delivered.'
     },
     offboarding: {
-      scan: [['Live','Deployed, used by a teammate'],['HR + IT','Requirements from both'],['UAT','Test plan before build']],
+      scan: [['Went live','Deployed, used by a teammate'],['HR + IT','Requirements from both'],['UAT','Test plan before build']],
       title: 'HR Offboarding Automation', kind: 'work', kindLabel: 'Workplace project', status: 'Built and deployed',
       card: 'Offboarding had steps owned by both HR and IT. I gathered requirements from both teams, planned responsibilities and testing, and built and deployed a Power Automate flow for it. This is a standard workflow, with no AI involved.',
       paras: ['I ran this as a phased project. I gathered requirements from HR and IT, wrote the project charter and RACI, mapped the risks, and set milestones and a user acceptance testing plan.', 'Then I built the Power Automate flow and deployed it. It went live and was used by another team member.'],
@@ -454,7 +405,7 @@ section{scroll-margin-top:16px}
     },
     legal: {
       title: 'Legal Intake Routing', kind: 'work', kindLabel: 'Workplace project', status: 'Built with Data & Analytics',
-      scan: [['Auditable','What Legal needed'],['No agent','Standard workflow chosen'],['Redesign','Dashboard rebuilt with Legal']],
+      scan: [['Auditable','What Legal needed'],['Workflow','Chosen over an AI agent'],['Redesign','Dashboard rebuilt with Legal']],
       card: 'Requests to the Legal mailbox had to be routed. I compared a Copilot Studio agent with a standard Power Automate and SharePoint design, recommended the standard design because Legal needed routing they could audit, and built it with the Data & Analytics team.',
       paras: [],
       story: [
@@ -468,13 +419,60 @@ section{scroll-margin-top:16px}
       scope: 'No volume or cycle-time figures. Routing details stay private.'
     },
     audits: {
-      scan: [['Weekly','Payroll result checks'],['Post-OE','VLOOKUP enrollment audits'],['Finance','Pivot-table summaries']],
-      title: 'Benefits Data Audits and Reporting', kind: 'summary', kindLabel: 'Experience summary', status: '',
-      card: 'I used Excel for benefits-side audits and reporting, including VLOOKUP checks after open enrollment and pivot-table summaries for Finance. I also audited weekly payroll results, including retirement-plan contributions.',
-      paras: ['In three benefits jobs I used Excel every day. I checked payroll results as payroll was finalized each week, ran post-open-enrollment audits with VLOOKUP, and summarized benefit payment details for Finance. This is benefits-side audit experience, not payroll processing or payroll-system configuration.'],
-      delivered: ['Post-open-enrollment audits', 'Weekly payroll result checks, including retirement-plan contributions', 'Pivot-table summaries for Finance'],
-      tools: ['Excel', 'VLOOKUP', 'Pivot tables'],
-      scope: 'A summary of recurring benefits-side audit work.'
+      scan: [['Weekly','Payroll result checks'],['Form 5500','And 1095-C, prepared'],['Carriers','Eligibility files sent']],
+      title: 'Benefits Data, Compliance and Vendor Files', kind: 'summary', kindLabel: 'Experience summary', status: '',
+      card: 'I ran benefits audits in Excel, prepared Form 5500 filings and ACA 1095-C reporting for final approval, processed 401(k) transactions, and sent eligibility files to carriers and monitored the transfers.',
+      paras: [
+        'In three benefits jobs I used Excel every day. I checked payroll results as payroll was finalized each week, including retirement-plan contributions, ran post-open-enrollment audits with VLOOKUP, and summarized benefit payment details for Finance.',
+        'In my most recent benefits role, I prepared Form 5500 filings, including the 401(k) plan, ACA 1095-C reporting, and responses to IRS and DOL audits and inquiries. My HR manager and director gave final approval and sent them.',
+        'In the same role, I processed 401(k) deferral changes, sent payroll contributions to the recordkeeper, and processed participant loans and hardship withdrawals, working closely with the recordkeeper and the broker through a recordkeeper change. I also checked benefit vendor invoices against contract terms.',
+        'I also developed a 401(k) and medical-plan RFP analysis covering about 2,000 North American employees and gave a recommendation to the HR manager and director, who made the decision.',
+        'In two earlier benefits roles, I sent benefit eligibility files to carriers by upload and secure file site and monitored the scheduled transfers.'
+      ],
+      delivered: ['Post-open-enrollment audits', 'Weekly payroll result checks, including retirement-plan contributions', 'Pivot-table summaries for Finance', 'Form 5500 and ACA 1095-C preparation', '401(k) transactions with the recordkeeper', 'Carrier eligibility file transfers'],
+      tools: ['Excel', 'ADP Workforce Now', 'EDI 834'],
+      scope: 'Benefits-side preparation, processing and audit work. Final filings were approved and sent by my manager and director. Not payroll processing.'
+    },
+    apm: {
+      scan: [['100+','Applications in the portfolio'],['With IT security','Connection review per request'],['Licenses','Counts, renewals, costs']],
+      title: 'Application Portfolio and Software Intake', kind: 'work', kindLabel: 'Workplace program', status: 'Lifecycle managed in ServiceNow',
+      card: 'I managed the ServiceNow Application Portfolio Management lifecycle for 100+ applications, from business demand intake through delivery and retirement. For each new software request, I reviewed how it would connect to company systems with IT security.',
+      paras: [
+        'I managed the ServiceNow Application Portfolio Management lifecycle for a portfolio of 100+ applications, from business demand intake through delivery and retirement. I worked in ServiceNow daily across incidents, requests, demand and reports, and changed ServiceNow forms and workflows.',
+        'For each new software request, I reviewed how the product would connect to company systems (single sign-on, APIs and data feeds) with IT security. I recorded and reviewed license counts, renewal dates, costs, vendor quotes and statements of work for applications in the portfolio and for new requests.',
+        'I cleaned source-of-truth records in ServiceNow (application records) and ADP Workforce Now (employee records): removed duplicates, set naming conventions and corrected data, including records with protected health information.',
+        'I also ran a training session teaching employees the user side of ServiceNow, and I hold the ServiceNow IT Leadership Professional Certificate.'
+      ],
+      delivered: ['Application lifecycle records, intake to retirement', 'Connection reviews with IT security', 'License, renewal and cost records', 'ServiceNow form and workflow changes', 'Record cleanup in ServiceNow and ADP', 'User-side ServiceNow training'],
+      tools: ['ServiceNow'],
+      scope: 'Review and recording work, with no approval or budget authority. ServiceNow work covered forms and workflows, not scripting or platform administration.'
+    },
+    prompts: {
+      scan: [['500+','Governed prompts'],['Global','Published on SharePoint'],['Documented','Responsible-AI documentation']],
+      title: 'Governed Prompt Library', kind: 'work', kindLabel: 'Workplace project', status: 'Published for global access',
+      card: 'I developed 500+ governed prompts with use-case categorization and responsible-AI documentation, and published the library on SharePoint for global access.',
+      paras: [
+        'I researched candidate prompts with Copilot Deep Research, collected use cases from the Digital Champions, and removed prompts that did not fit. I worked with German Copilot colleagues on the library.',
+        'The delivered library holds 500+ governed prompts, categorized by use case, with responsible-AI documentation, published on SharePoint for global access. The goal was safer, easier use of approved AI tools.'
+      ],
+      delivered: ['500+ governed prompts', 'Use-case categories', 'Responsible-AI documentation', 'SharePoint library for global access'],
+      tools: ['Microsoft Copilot', 'Copilot Deep Research', 'SharePoint'],
+      scope: 'The count is prompts in the delivered library, not users or deployments. Built with German colleagues, not a global program I ran.'
+    },
+    mailbox: {
+      scan: [['Went live','Used by the Legal team'],['Solo build','Designed, built, tested'],['SharePoint','Where copies were saved']],
+      title: 'Legal Mailbox Capture Flow', kind: 'work', kindLabel: 'Workplace project', status: 'Built, went live',
+      card: 'I built a Power Automate flow for a shared Legal mailbox. It captured emails, extracted their metadata, converted timestamps to Eastern time and saved .eml copies to SharePoint. It went live and the Legal team used it.',
+      paras: [],
+      story: [
+        ['The need', 'The Legal team needed emails from a shared mailbox captured and saved to SharePoint with their details.'],
+        ['Requirements', 'I met with Legal to gather the requirements, and a member of the Legal team gave me feedback on what was needed as I built.'],
+        ['Approach', 'I designed and built the flow on my own in Power Automate. It captured emails, extracted their metadata, converted timestamps to Eastern time and saved .eml copies to SharePoint. I tested it and helped implement it.'],
+        ['Outcome', 'The flow went live and the Legal team used it.']
+      ],
+      delivered: ['Requirements from meetings with Legal', 'Flow design and build', 'Testing', 'Implementation support'],
+      tools: ['Power Automate', 'SharePoint'],
+      scope: 'A separate project from Legal intake routing. Mailbox and record details stay private.'
     },
     tracker: {
       scan: [['Team','Cross-functional build'],['Routing','Requests and notifications'],['One door','For benefits requests']],
@@ -484,23 +482,14 @@ section{scroll-margin-top:16px}
       delivered: [],
       tools: ['SharePoint', 'Power Automate'],
       scope: 'A contribution to a team effort.'
-    },
-    intakeSim: {
-      scan: [['Simulation','Not employer work'],['Scoring','Model for AI ideas'],['Docs','Governance and templates']],
-      title: 'AI Opportunity Intake Workbench', kind: 'sim', kindLabel: 'Portfolio simulation', status: '',
-      card: 'When a team has more AI ideas than time, it has to decide which ones to pursue first. This simulation shows how I would collect those ideas, score them, and route them for review.',
-      paras: ['When a team has more AI ideas than time, it has to decide which ones to pursue first. This simulation shows how I would collect those ideas, score them, route them for review, and report on them.', 'The repository holds the documentation: a scoring model, a field dictionary, governance notes, and a decision brief template. It is a simulation.'],
-      delivered: [], tools: [],
-      scope: 'A portfolio simulation built outside any employer environment.',
-      repo: ''
     }
   };
   var LANES = {
-    ai: { label: 'AI Enablement', intro: 'My AI work was hands-on: building and piloting tools, writing the training and guidance, and helping people use them day to day. Not every problem needed AI. For Legal intake routing, I compared an agent with a standard workflow and recommended the workflow.', order: ['learning', 'scorm', 'legal'] },
-    hr: { label: 'HR & Benefits Technology', intro: 'Benefits work showed me where systems break down for employees, like rejected eligibility files and data that does not match between vendors. I use that when I gather requirements, test a workflow, or write the guidance people will read.', order: ['offboarding', 'audits', 'library'] },
-    process: { label: 'Process Improvement', intro: 'I look at how the work moves before I pick a tool. I helped IT teams document 29 processes in a shared library, planned HR offboarding with a charter and test plan before building it, and wrote request standards and response measures for a benefits team. I am also a Lean Six Sigma Black Belt.', order: ['library', 'offboarding', 'tracker'] },
+    ai: { label: 'AI Enablement', intro: 'My AI work was hands-on: a 500+ prompt library with responsible-AI documentation, a learning series with 1,019 attendees in 2025, and tools I built and put in front of users. Not every problem needed AI. The Legal mailbox flow is a standard workflow, and for Legal intake routing I recommended a workflow over an agent.', order: ['learning', 'prompts', 'mailbox'] },
+    hr: { label: 'HR & Benefits Technology', intro: 'Benefits work showed me where systems break down for employees, like rejected eligibility files and data that does not match between vendors. I use that when I gather requirements, test a workflow, or write the guidance people will read.', order: ['audits', 'apm', 'offboarding'] },
+    process: { label: 'Process Improvement', intro: 'I look at how the work moves before I pick a tool. I helped IT teams document 29 processes in a shared library, planned HR offboarding with a charter and test plan before building it, and wrote request standards and response measures for a benefits team. I am also a Lean Six Sigma Black Belt.', order: ['library', 'offboarding', 'scorm'] },
     ops: { label: 'Benefits Operations', intro: 'Day to day, my benefits work was enrollment and life-event changes, COBRA and dependent eligibility, eligibility file rejects, Excel audits, vendor coordination, and open-enrollment and new-hire presentations.', order: ['audits', 'tracker', 'offboarding'] },
-    intake: { label: 'Intake & Process Governance', intro: 'For application portfolio and business analysis roles. In IT I handled new application requests and their review, and helped the IT teams document their processes. The workbench below is a portfolio simulation, kept separate from that workplace work.', order: ['library', 'intakeSim'] }
+    intake: { label: 'Intake & Process Governance', intro: 'For application portfolio and business analysis roles. In IT I managed the ServiceNow application portfolio, reviewed new software requests with IT security, and helped the IT teams document their processes.', order: ['apm', 'legal', 'library'] }
   };
 
   var lane = 'hr', lastTrigger = null;
